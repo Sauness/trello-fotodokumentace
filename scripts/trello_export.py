@@ -84,7 +84,8 @@ class Trello:
                 if e.code == 429 or e.code >= 500:
                     time.sleep(2 ** attempt)
                     continue
-                raise
+                body = e.read().decode("utf-8", "replace")[:300]
+                sys.exit(f"Trello API {e.code} on {path}: {body}")
         raise RuntimeError(f"Trello API failed: {path}")
 
     def download(self, url: str, dest: Path) -> None:
