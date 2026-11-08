@@ -2,7 +2,11 @@
 
 Záloha Trello boardu [Fotodokumentace](https://trello.com/b/2Fa6uRao/fotodokumentace): karty s popisy a všechny fotky z příloh.
 
+**Galerie:** <https://sauness.github.io/trello-fotodokumentace/>  
 **Archiv:** [`archive/README.md`](archive/README.md)
+
+Galerii staví `scripts/build_site.py` (šablona `scripts/site/index.html`) a workflow
+„Galerie (GitHub Pages)“ ji nasadí po každém exportu z Trella i po změně skriptů.
 
 ## Struktura
 
