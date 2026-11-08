@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fotodokumentace Blanska</title>
+<meta name="description" content="Archiv historických fotografií Blanska a okolí z Trello boardu Fotodokumentace.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: archive reading room — sticky filter bar over a contact-sheet grid; card detail and lightbox as overlays. */
+:root {
+  color-scheme: light;
+  --bg: #eceeef;          /* silver-gelatin paper, cool */
+  --surface: #ffffff;
+  --sunk: #dfe3e6;
+  --fg: #1a2026;
+  --muted: #5a6670;
+  --line: #cfd5da;
+  --accent: #1f4e79;      /* cyanotype blue */
+  --accent-soft: #dbe6f1;
+  --on-accent: #ffffff;
+  --shade: rgba(10, 14, 18, .94);
+  --f-display: "Literata", Georgia, "Times New Roman", serif;
+  --f-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --radius: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111417; --surface: #1a1f24; --sunk: #232a31; --fg: #e5e9ec; --muted: #98a3ad;
+    --line: #2d353d; --accent: #8db4da; --accent-soft: #1f3347; --on-accent: #0d1720;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111417; --surface: #1a1f24; --sunk: #232a31; --fg: #e5e9ec; --muted: #98a3ad;
+  --line: #2d353d; --accent: #8db4da; --accent-soft: #1f3347; --on-accent: #0d1720;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 15px/1.5 var(--f-body);
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+a { color: var(--accent); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wrap { max-width: 1320px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+img { max-width: 100%; display: block; }
+.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* header */
+header.top { padding-block: 40px 20px; }
+.eyebrow { font: 500 12px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font: 600 clamp(30px, 5vw, 48px)/1.08 var(--f-display); margin: 10px 0 14px; text-wrap: balance; letter-spacing: -.01em; }
+.stats { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); }
+.stats b { color: var(--fg); font-weight: 500; }
+.stats a { color: var(--muted); }
+
+/* timeline */
+.timeline { margin-top: 24px; }
+.timeline .bars { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; align-items: end; height: 64px; }
+.timeline button { all: unset; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.timeline .bar { background: var(--line); border-radius: 2px 2px 0 0; min-height: 3px; transition: background .15s; }
+.timeline button:hover .bar, .timeline button[aria-pressed="true"] .bar { background: var(--accent); }
+.timeline button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.timeline .labels { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; margin-top: 6px; font: 11px/1 var(--f-mono); color: var(--muted); }
+.timeline .labels span { text-align: center; white-space: nowrap; overflow: hidden; }
+.timeline .note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+/* toolbar */
+.bar-sticky { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.tools { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; padding-block: 12px; }
+.search { flex: 1 1 220px; min-width: 0; position: relative; }
+.search input { width: 100%; padding: 9px 12px 9px 34px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--fg); font: inherit; }
+.search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: none; padding: 8px 14px; cursor: pointer; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 12px; scrollbar-width: thin; }
+.chip { flex: none; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 5px 12px; cursor: pointer; white-space: nowrap; color: var(--fg); }
+.chip .num { color: var(--muted); font-size: 12px; margin-left: 6px; }
+.chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--fg); }
+.active-filter { display: none; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); padding-bottom: 10px; }
+.active-filter.on { display: flex; }
+.linkbtn { border: 0; background: none; color: var(--accent); cursor: pointer; padding: 0; text-decoration: underline; }
+
+/* card grid */
+main { padding-block: 24px 64px; }
+section.list { margin-bottom: 44px; }
+section.list > h2 { font: 600 22px/1.2 var(--f-display); margin: 0 0 4px; }
+section.list > .sub { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+.card { all: unset; cursor: pointer; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; min-width: 0; transition: border-color .15s, transform .15s; }
+.card:hover { border-color: var(--accent); }
+.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mosaic { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; aspect-ratio: 4 / 3; background: var(--sunk); }
+.mosaic img { width: 100%; height: 100%; object-fit: cover; }
+.mosaic img:first-child { grid-row: 1 / 3; }
+.mosaic.n1 img:first-child, .mosaic.n2 img:first-child { grid-column: 1 / 3; grid-row: 1 / 3; }
+.mosaic.n2 img:nth-child(2) { display: none; }
+.mosaic.n0 { display: grid; place-items: center; color: var(--muted); font-size: 13px; grid-template-columns: 1fr; }
+.card .body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px; }
+.card .t { font-weight: 600; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card .m { color: var(--muted); font-size: 12px; display: flex; gap: 10px; }
+
+/* photo wall (justified rows) */
+.wall { --h: 180px; display: flex; flex-wrap: wrap; gap: 4px; }
+.wall::after { content: ""; flex-grow: 999; }
+.wall button { all: unset; cursor: pointer; position: relative; height: var(--h); max-width: 100%; background: var(--sunk); overflow: hidden; }
+.wall button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wall img { width: 100%; height: 100%; object-fit: cover; transition: opacity .15s; }
+.wall button:hover img { opacity: .85; }
+.more { display: flex; justify-content: center; margin-top: 24px; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); padding: 9px 16px; cursor: pointer; }
+.btn:hover { border-color: var(--accent); }
+.empty { padding: 48px 0; text-align: center; color: var(--muted); }
+
+/* card detail */
+.sheet { position: fixed; inset: 0; z-index: 20; background: var(--bg); overflow-y: auto; overscroll-behavior: contain; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.sheet-head { position: sticky; top: 0; z-index: 2; background: var(--bg); border-bottom: 1px solid var(--line); }
+.sheet-head .wrap { display: flex; align-items: center; gap: 12px; padding-block: 10px; }
+.sheet-head .crumb { color: var(--muted); font-size: 13px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.detail { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 24px 64px; }
+.detail h2 { font: 600 clamp(24px, 3.4vw, 34px)/1.15 var(--f-display); margin: 0 0 8px; text-wrap: balance; }
+.detail .meta { display: flex; flex-wrap: wrap; gap: 6px 16px; color: var(--muted); font-size: 13px; }
+.prose { max-width: 68ch; white-space: pre-line; overflow-wrap: anywhere; }
+.comments { max-width: 68ch; display: grid; gap: 12px; }
+.comment { border-left: 2px solid var(--line); padding-left: 12px; }
+.comment .who { font-size: 12px; color: var(--muted); }
+.comment p { margin: 2px 0 0; white-space: pre-line; overflow-wrap: anywhere; }
+h3 { font: 500 12px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+
+/* lightbox */
+.lb { position: fixed; inset: 0; z-index: 30; background: var(--shade); color: #eef1f3; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
+.lb-top, .lb-bottom { display: flex; align-items: center; gap: 12px; padding: 10px 16px; min-width: 0; }
+.lb-top .count { font: 13px var(--f-mono); color: #aab4bd; }
+.lb-top .spacer { flex: 1; }
+.lb a, .lb .linkbtn { color: #b9d3ec; font-size: 13px; }
+.lb-stage { position: relative; display: grid; place-items: center; min-height: 0; padding: 0 56px; }
+.lb-stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 64px; border: 0; border-radius: var(--radius); background: rgba(255,255,255,.08); color: #fff; cursor: pointer; font-size: 22px; }
+.lb-nav:hover { background: rgba(255,255,255,.18); }
+.lb-nav.prev { left: 6px; } .lb-nav.next { right: 6px; }
+.lb-x { border: 0; background: rgba(255,255,255,.1); color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 18px; }
+.lb-bottom { flex-direction: column; align-items: flex-start; gap: 2px; font-size: 14px; }
+.lb-bottom .cap { color: #d9dee2; overflow-wrap: anywhere; }
+.lb-bottom .card-name { color: #aab4bd; font-size: 13px; }
+
+footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-top: 1px solid var(--line); }
+
+@media (max-width: 640px) {
+  header.top { padding-block: 24px 12px; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .card .body { padding: 8px 9px 10px; }
+  .wall { --h: 110px; }
+  .lb-stage { padding: 0 4px; }
+  .lb-nav { display: none; }
+  .timeline .labels span:nth-child(even) { visibility: hidden; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top wrap">
+  <div class="eyebrow">Archiv · Blansko a okolí</div>
+  <h1>Fotodokumentace Blanska</h1>
+  <div class="stats" id="stats"></div>
+  <div class="timeline" id="timeline" aria-label="Fotky podle desetiletí"></div>
+</header>
+
+<div class="bar-sticky">
+  <div class="wrap">
+    <div class="tools">
+      <label class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Hledat v názvech, popisech a komentářích" aria-label="Hledat">
+      </label>
+      <div class="seg" role="group" aria-label="Zobrazení">
+        <button id="v-cards" aria-pressed="true">Karty</button>
+        <button id="v-photos" aria-pressed="false">Všechny fotky</button>
+      </div>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Kategorie"></div>
+    <div class="active-filter" id="active"></div>
+  </div>
+</div>
+
+<main class="wrap" id="main"><div class="empty">Načítám archiv…</div></main>
+
+<footer class="wrap" id="foot"></footer>
+
+<div class="sheet" id="sheet" hidden></div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Prohlížeč fotek">
+  <div class="lb-top">
+    <span class="count" id="lb-count"></span>
+    <span class="spacer"></span>
+    <a id="lb-orig" target="_blank" rel="noopener">Originál</a>
+    <button class="linkbtn" id="lb-card">Karta</button>
+    <button class="lb-x" id="lb-x" aria-label="Zavřít">✕</button>
+  </div>
+  <div class="lb-stage" id="lb-stage">
+    <button class="lb-nav prev" id="lb-prev" aria-label="Předchozí">‹</button>
+    <img id="lb-img" alt="">
+    <button class="lb-nav next" id="lb-next" aria-label="Další">›</button>
+  </div>
+  <div class="lb-bottom"><span class="cap" id="lb-cap"></span><span class="card-name" id="lb-cardname"></span></div>
+</div>
+
+<script>
+(() => {
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const linkify = (s) => esc(s).replace(/https?:\/\/[^\s<]+/g, (u) => `<a href="${u}" target="_blank" rel="noopener">${u.length > 60 ? u.slice(0, 57) + "…" : u}</a>`);
+const fold = (s) => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const plural = (n, one, few, many) => `${n} ${n === 1 ? one : n >= 2 && n <= 4 ? few : many}`;
+const fotek = (n) => plural(n, "fotka", "fotky", "fotek");
+const karet = (n) => plural(n, "karta", "karty", "karet");
+
+let DATA, CARDS = [], BYCARD = {}, BYPHOTO = {};
+const state = { q: "", list: null, decade: null, view: "cards", wallLimit: 240 };
+let lbSeq = [], lbIdx = 0;
+
+fetch("data.json").then((r) => r.json()).then(init).catch(() => {
+  $("main").innerHTML = '<div class="empty">Archiv se nepodařilo načíst. Zkuste stránku obnovit.</div>';
+});
+
+function init(data) {
+  DATA = data;
+  for (const l of data.lists) for (const c of l.cards) {
+    c.listName = l.name;
+    c.decades = [...new Set(c.years.map((y) => Math.floor(y / 10) * 10))];
+    c.text = fold([c.name, c.desc, ...c.comments.map((x) => x.text), ...c.photos.map((p) => p.caption)].join(" "));
+    CARDS.push(c); BYCARD[c.id] = c;
+    c.photos.forEach((p, i) => { p.card = c; p.i = i; BYPHOTO[p.id] = p; });
+  }
+  const nPhotos = CARDS.reduce((a, c) => a + c.photos.length, 0);
+  const allYears = CARDS.flatMap((c) => c.years);
+  const yr = allYears.length ? `${Math.min(...allYears)}–${Math.max(...allYears)}` : "";
+  $("stats").innerHTML = `<span><b class="num">${nPhotos}</b> fotek</span><span><b class="num">${CARDS.length}</b> karet</span><span><b class="num">${data.lists.length}</b> kategorií</span>${yr ? `<span>roky <b class="num">${yr}</b></span>` : ""}<a href="${data.board}" target="_blank" rel="noopener">Trello board</a>`;
+  $("foot").innerHTML = `Záloha Trello boardu <a href="${data.board}" target="_blank" rel="noopener">Fotodokumentace</a>, aktualizuje se každé pondělí. Zdroj a originály fotek: <a href="${data.repo}" target="_blank" rel="noopener">GitHub</a>.`;
+  buildTimeline();
+  buildChips();
+  $("q").addEventListener("input", (e) => { state.q = fold(e.target.value.trim()); state.wallLimit = 240; render(); });
+  $("v-cards").onclick = () => setView("cards");
+  $("v-photos").onclick = () => setView("photos");
+  try { const v = localStorage.getItem("fd-view"); if (v === "photos") state.view = "photos"; } catch (e) {}
+  setView(state.view, true);
+  wireLightbox();
+  window.addEventListener("hashchange", route);
+  route();
+}
+
+function setView(v, silent) {
+  state.view = v;
+  $("v-cards").setAttribute("aria-pressed", v === "cards");
+  $("v-photos").setAttribute("aria-pressed", v === "photos");
+  try { localStorage.setItem("fd-view", v); } catch (e) {}
+  render();
+}
+
+function buildTimeline() {
+  const counts = {};
+  let undated = 0;
+  for (const c of CARDS) {
+    if (!c.decades.length) { undated += c.photos.length; continue; }
+    for (const d of c.decades) counts[d] = (counts[d] || 0) + c.photos.length;
+  }
+  const ds = Object.keys(counts).map(Number);
+  if (!ds.length) return;
+  const all = [];
+  for (let d = Math.min(...ds); d <= Math.max(...ds); d += 10) all.push(d);
+  const max = Math.max(...all.map((d) => counts[d] || 0));
+  $("timeline").innerHTML = `<div class="eyebrow" style="margin-bottom:10px">Fotky podle desetiletí</div>
+    <div class="bars">${all.map((d) => `<button data-d="${d}" aria-pressed="false" title="${d}. léta: ${fotek(counts[d] || 0)}" aria-label="${d}. léta, ${fotek(counts[d] || 0)}" ${counts[d] ? "" : "disabled"}><span class="bar" style="height:${counts[d] ? Math.max(4, (counts[d] / max) * 100) : 0}%"></span></button>`).join("")}</div>
+    <div class="labels num">${all.map((d) => `<span>${d}</span>`).join("")}</div>
+    <div class="note">Podle letopočtů v názvech a popisech karet. ${fotek(undated)} je bez uvedeného roku.</div>`;
+  $("timeline").querySelectorAll("button").forEach((b) => b.onclick = () => {
+    const d = Number(b.dataset.d);
+    state.decade = state.decade === d ? null : d; state.wallLimit = 240;
+    render();
+  });
+}
+
+function buildChips() {
+  const html = [`<button class="chip" data-l="" aria-pressed="true">Vše<span class="num">${CARDS.reduce((a, c) => a + c.photos.length, 0)}</span></button>`]
+    .concat(DATA.lists.map((l) => `<button class="chip" data-l="${l.id}" aria-pressed="false">${esc(l.name)}<span class="num">${l.cards.reduce((a, c) => a + c.photos.length, 0)}</span></button>`));
+  $("chips").innerHTML = html.join("");
+  $("chips").querySelectorAll(".chip").forEach((b) => b.onclick = () => {
+    state.list = b.dataset.l === "" ? null : Number(b.dataset.l); state.wallLimit = 240;
+    render();
+  });
+}
+
+function filtered() {
+  return CARDS.filter((c) =>
+    (state.list === null || c.list === state.list) &&
+    (state.decade === null || c.decades.includes(state.decade)) &&
+    (!state.q || state.q.split(/\s+/).every((w) => c.text.includes(w))));
+}
+
+function render() {
+  $("chips").querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", (b.dataset.l === "" ? null : Number(b.dataset.l)) === state.list));
+  $("timeline").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", Number(b.dataset.d) === state.decade));
+  const cards = filtered();
+  const photos = cards.flatMap((c) => c.photos);
+  const act = $("active");
+  const parts = [];
+  if (state.decade !== null) parts.push(`${state.decade}. léta`);
+  if (state.q) parts.push(`„${esc($("q").value.trim())}“`);
+  act.classList.toggle("on", parts.length > 0);
+  act.innerHTML = parts.length ? `<span>${parts.join(" · ")}: ${karet(cards.length)}, ${fotek(photos.length)}</span><button class="linkbtn" id="clear">Zrušit filtr</button>` : "";
+  if (parts.length) $("clear").onclick = () => { state.decade = null; state.q = ""; $("q").value = ""; render(); };
+
+  if (!cards.length) { $("main").innerHTML = '<div class="empty">Nic neodpovídá filtru.</div>'; return; }
+  if (state.view === "photos") return renderWall(photos);
+
+  const groups = DATA.lists.map((l) => ({ l, cards: cards.filter((c) => c.list === l.id) })).filter((g) => g.cards.length);
+  $("main").innerHTML = groups.map(({ l, cards }) => `
+    <section class="list">
+      <h2>${esc(l.name)}</h2>
+      <div class="sub">${karet(cards.length)} · ${fotek(cards.reduce((a, c) => a + c.photos.length, 0))}</div>
+      <div class="cards">${cards.map(cardTile).join("")}</div>
+    </section>`).join("");
+  $("main").querySelectorAll(".card").forEach((el) => el.onclick = () => { location.hash = "c-" + el.dataset.id; });
+}
+
+function cardTile(c) {
+  const ph = c.photos.slice(0, 3);
+  const n = Math.min(c.photos.length, 3);
+  const yr = c.years.length ? (c.years.length > 1 ? `${c.years[0]}–${c.years[c.years.length - 1]}` : c.years[0]) : "";
+  return `<button class="card" data-id="${c.id}">
+    <div class="mosaic n${n}">${n ? ph.map((p) => `<img src="t/${p.id}.jpg" alt="" loading="lazy">`).join("") : "bez fotek"}</div>
+    <div class="body"><span class="t">${esc(c.name)}</span><span class="m"><span class="num">${fotek(c.photos.length)}</span>${yr ? `<span class="num">${yr}</span>` : ""}</span></div>
+  </button>`;
+}
+
+function renderWall(photos) {
+  const shown = photos.slice(0, state.wallLimit);
+  $("main").innerHTML = `<div class="wall">${shown.map((p) => tile(p)).join("")}</div>
+    ${photos.length > shown.length ? `<div class="more"><button class="btn" id="more">Zobrazit další (${photos.length - shown.length})</button></div>` : ""}`;
+  wireTiles($("main"), photos);
+  if ($("more")) $("more").onclick = () => { state.wallLimit += 240; renderWall(photos); };
+}
+
+function tile(p) {
+  const r = p.w / p.h || 1.33;
+  return `<button data-p="${p.id}" style="flex-grow:${(r * 100).toFixed(0)};width:calc(var(--h, 180px) * ${r.toFixed(3)})" aria-label="${esc(p.caption || p.card.name)}"><img src="t/${p.id}.jpg" alt="" loading="lazy"></button>`;
+}
+function wireTiles(root, seq) {
+  root.querySelectorAll("[data-p]").forEach((b) => b.onclick = () => openLB(seq, seq.indexOf(BYPHOTO[b.dataset.p])));
+}
+
+/* ---------- routing: #c-<card> ---------- */
+function route() {
+  const h = location.hash.slice(1);
+  if (h.startsWith("c-") && BYCARD[h.slice(2)]) showCard(BYCARD[h.slice(2)]);
+  else hideCard();
+}
+
+function showCard(c) {
+  const s = $("sheet");
+  const yr = c.years.join(", ");
+  s.innerHTML = `
+    <div class="sheet-head"><div class="wrap">
+      <button class="btn" id="back">← Zpět</button>
+      <span class="crumb">${esc(c.listName)}</span>
+    </div></div>
+    <div class="wrap detail">
+      <div>
+        <h2>${esc(c.name)}</h2>
+        <div class="meta"><span class="num">${fotek(c.photos.length)}</span>${yr ? `<span>roky <span class="num">${yr}</span></span>` : ""}${c.trello ? `<a href="${c.trello}" target="_blank" rel="noopener">Otevřít v Trellu</a>` : ""}</div>
+      </div>
+      ${c.desc ? `<div><h3>Popis</h3><div class="prose">${linkify(c.desc)}</div></div>` : ""}
+      ${c.comments.length ? `<div><h3>Komentáře</h3><div class="comments">${c.comments.map((x) => `<div class="comment"><div class="who">${esc(x.who)} · <span class="num">${x.date}</span></div><p>${linkify(x.text)}</p></div>`).join("")}</div></div>` : ""}
+      <div>${c.photos.length ? `<h3>Fotky</h3><div class="wall">${c.photos.map(tile).join("")}</div>` : `<div class="empty">Karta nemá žádné fotky.</div>`}</div>
+    </div>`;
+  s.hidden = false;
+  s.scrollTop = 0;
+  document.body.style.overflow = "hidden";
+  $("back").onclick = () => { location.hash = ""; };
+  wireTiles(s, c.photos);
+  $("back").focus();
+}
+function hideCard() {
+  $("sheet").hidden = true;
+  if ($("lb").hidden) document.body.style.overflow = "";
+}
+
+/* ---------- lightbox ---------- */
+function openLB(seq, i) {
+  lbSeq = seq; lbIdx = Math.max(0, i);
+  $("lb").hidden = false;
+  document.body.style.overflow = "hidden";
+  showLB();
+  $("lb-x").focus();
+}
+function closeLB() {
+  $("lb").hidden = true;
+  $("lb-img").removeAttribute("src");
+  if ($("sheet").hidden) document.body.style.overflow = "";
+}
+function showLB() {
+  const p = lbSeq[lbIdx];
+  const img = $("lb-img");
+  img.src = `t/${p.id}.jpg`;
+  const full = new Image();
+  full.onload = () => { if (lbSeq[lbIdx] === p) img.src = full.src; };
+  full.src = `m/${p.id}.jpg`;
+  img.alt = p.caption || p.card.name;
+  $("lb-count").textContent = `${lbIdx + 1} / ${lbSeq.length}`;
+  $("lb-cap").textContent = p.caption && !/^(fb_img|img|screenshot|obr[aá]zek|image)/i.test(p.caption) ? p.caption : "";
+  $("lb-cardname").textContent = `${p.card.name} · ${p.card.listName}`;
+  $("lb-orig").href = p.src;
+  $("lb-card").hidden = location.hash === "#c-" + p.card.id;
+  $("lb-prev").disabled = lbIdx === 0;
+  $("lb-next").disabled = lbIdx === lbSeq.length - 1;
+  [lbSeq[lbIdx + 1], lbSeq[lbIdx - 1]].forEach((q) => { if (q) new Image().src = `m/${q.id}.jpg`; });
+}
+function step(d) {
+  const n = lbIdx + d;
+  if (n < 0 || n >= lbSeq.length) return;
+  lbIdx = n; showLB();
+}
+function wireLightbox() {
+  $("lb-x").onclick = closeLB;
+  $("lb-prev").onclick = () => step(-1);
+  $("lb-next").onclick = () => step(1);
+  $("lb-card").onclick = () => { const c = lbSeq[lbIdx].card; closeLB(); location.hash = "c-" + c.id; };
+  $("lb-stage").addEventListener("click", (e) => { if (e.target === e.currentTarget) closeLB(); });
+  let x0 = null;
+  $("lb-stage").addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  $("lb-stage").addEventListener("touchend", (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (!$("lb").hidden) {
+      if (e.key === "Escape") closeLB();
+      else if (e.key === "ArrowRight") step(1);
+      else if (e.key === "ArrowLeft") step(-1);
+    } else if (!$("sheet").hidden && e.key === "Escape") location.hash = "";
+  });
+}
+})();
+</script>
+</body>
+</html>
