@@ -85,7 +85,13 @@ class Trello:
                     time.sleep(2 ** attempt)
                     continue
                 body = e.read().decode("utf-8", "replace")[:300]
-                sys.exit(f"Trello API {e.code} on {path}: {body}")
+                hint = ""
+                if e.code == 401:
+                    k, t = self.key, self.token
+                    hint = (f" [key: {len(k)} chars, hex={bool(re.fullmatch(r'[0-9a-f]+', k))}, "
+                            f"whitespace={k != k.strip()}; token: {len(t)} chars, "
+                            f"whitespace={t != t.strip()}]")
+                sys.exit(f"Trello API {e.code} on {path}: {body}{hint}")
         raise RuntimeError(f"Trello API failed: {path}")
 
     def download(self, url: str, dest: Path) -> None:
