@@ -15,6 +15,10 @@ a manželovi byla velkou a velmi schopnou oporou. Společně dům s řeznictvím
       V 30. letech byl Mojmír v představenstvu Moravské hospodářské komory. V podnikání se mu dařilo, uzeniny neprodával jen v Blansku a okolí, díky umístění v blízkosti vlakové zastávky salámy dovážel do Pardubic a do Prahy pražskou šunku, na kterou nechával speciálně vykrmovat prasata u místních hospodářů. Oblast, ve které  Mojmírovi život nepřál bylo zdraví. Začal mít problémy se srdcem, které ho omezovaly v osobním i profesním životě. V roce 1948 byla jeho udírna zapečetěna a prodejnu převzal národní podnik Masna, kde oba manželé zůstali zaměstnáni, Mojmír až do své smrti v roce 1960.
 Oproti jiným živnostníkům měli manželé Brajerovi to štěstí, že mohli dožít ve svém. Ačkoli sledovat, jak o něčem, co sami vybudovali rozhodují cizí lidé bylo především pro Mojmíra velmi bolestivé.
 
-## Přílohy
+## Přílohy (3)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![fotka.jpeg](01-fotka.jpeg)
+
+![fotka.jpeg](02-fotka.jpeg)
+
+![fotka.jpeg](03-fotka.jpeg)

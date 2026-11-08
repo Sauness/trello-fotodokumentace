@@ -1,6 +1,6 @@
 # Fotodokumentace
 
-Export z Trella: <https://trello.com/b/2Fa6uRao>
+Export z Trella: <https://trello.com/b/2Fa6uRao/fotodokumentace>
 
 | List | Karet |
 |---|---|

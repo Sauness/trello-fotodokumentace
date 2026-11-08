@@ -23,6 +23,10 @@ Obrázky: rekonstrukce původní Klamovky z roku 1857 a počátku 20.století a 
 
 [https://www.facebook.com/groups/111730639512218/?multi_permalinks=1768517533833512&hoisted_section_header_type=recently_seen&__cft__%5B0%5D=AZbhXr2ITZgsUCtQ9EzqEtuB8oRQDjhmByIWNSa5_weaoyNik0j1VN6Kz9bLibMv_ImwpE3q-V8nM8TNl_czKBU74P2-OeorlXyzm32IVAXtvhRxF_DFXxy9KxHYl3vwEeqqqxTgEU_h2tuWIPf0wAGg&__tn__=%2CO%2CP-R](https://www.facebook.com/groups/111730639512218/?multi_permalinks=1768517533833512&hoisted_section_header_type=recently_seen&__cft__%5B0%5D=AZbhXr2ITZgsUCtQ9EzqEtuB8oRQDjhmByIWNSa5_weaoyNik0j1VN6Kz9bLibMv_ImwpE3q-V8nM8TNl_czKBU74P2-OeorlXyzm32IVAXtvhRxF_DFXxy9KxHYl3vwEeqqqxTgEU_h2tuWIPf0wAGg&__tn__=%2CO%2CP-R "smartCard-inline")
 
-## Přílohy
+## Přílohy (3)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![image.png](01-image.png)
+
+![image.png](02-image.png)
+
+![image.png](03-image.png)

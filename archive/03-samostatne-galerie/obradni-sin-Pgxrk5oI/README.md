@@ -15,6 +15,22 @@ Smuteční obřadní síň se nachází v severní části města Blanska, při 
 pro hudebníky. Konstrukční systém spočívá v ocelovém a železobetonovém montovaném skeletu s cihlovým obvodovým pláštěm. Strop tvoří stropní panely PZD 560 a podhledy Hunter Douglas. Krov je tvořen ocelovými příhradovými vazníky a střešní krytina je živičná. Hlavní vstup do budovy z jihu je součástí částečně proskleného vestibulu, tvořeného dvěma ocelohliníkovými prosklenými stěnami. Kubus s vlastní obřadní síní výrazně převyšuje ostatní části budovy. Fasáda této části je ze dvou třetin tvořena režným cihlovým zdivem, zakončeným pásovými okny, nad nimiž je poslední třetina obložena hliníkovými obklady Hunter Douglas. Východní stěna je ve dvou místech vertikálně prolomena ocelohliníkovými prosklenými pásy s jedno- a dvoukřídlovými dveřmi. Ostatní části budovy jsou omítnuty břízolitovou omítkou. Okna v severní, hospodářské části byla vyměněna za plastová. Západní, provozní část je na západní straně opatřena úzkou podlouhlou lodžií zastíněnou žaluzií a na východní straně proskleným vstupem do květinářství. Podlahy v interiéru jsou různého typu: mramorové desky, teraco, travertin, keramická dlažba a PVC. Topení je řešeno pomocí plynových kamen WAF.
 Interiér obřadní síně, navržený brněnským architektem Ivanem Rullerem je tvořen kombinací režného cihlového obkladu stěn, černě mořeného dřeva dveří, lavic, a osvětlovacích prvků a šedého mramoru podlahy, řečnického pultu a velkého květináče. Dominuje mu plastika brněnského malíře a grafika Jánuše Kubíčka z leštěné mosazi, umístěná na dveřích a nadedveřním panelu v místě, kde vyjíždí a zajíždí rakev. Malíř a grafik Jan Šmíd spolu s uměleckým sklářem Antonínem Othem vytvořili vitráž z kouřových skel do nadsvětlíku ve východní stěně. Autenticky dochovaná budova smuteční obřadní síně představuje zástupce místní občanské vybavenosti ze 70. let 20. století. Řešení jejího interiéru je dílem vynikajícího brněnského architekta Ivana Rullera a zahrnuje hodnotná umělecká díla dalších předních brněnských umělců.
 
-## Přílohy
+## Přílohy (9)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1681208092871.jpg](01-fb-img-1681208092871.jpg)
+
+![FB_IMG_1681208095440.jpg](02-fb-img-1681208095440.jpg)
+
+![FB_IMG_1681208097833.jpg](03-fb-img-1681208097833.jpg)
+
+![FB_IMG_1681208100125.jpg](04-fb-img-1681208100125.jpg)
+
+![FB_IMG_1681208102384.jpg](05-fb-img-1681208102384.jpg)
+
+![FB_IMG_1681208104712.jpg](06-fb-img-1681208104712.jpg)
+
+![FB_IMG_1681208106954.jpg](07-fb-img-1681208106954.jpg)
+
+![FB_IMG_1681208109396.jpg](08-fb-img-1681208109396.jpg)
+
+![FB_IMG_1681208111705.jpg](09-fb-img-1681208111705.jpg)

@@ -9,6 +9,10 @@
 
 BLANSKO HISTORICKÉ.  PODZÁMČÍ PŘED OPRAVOU KOLEM ROKU 1963. Pavel Svoboda FB
 
-## Přílohy
+## Přílohy (3)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1696188262761.jpg](01-fb-img-1696188262761.jpg)
+
+![FB_IMG_1696188259614.jpg](02-fb-img-1696188259614.jpg)
+
+![fotka.jpeg](03-fotka.jpeg)

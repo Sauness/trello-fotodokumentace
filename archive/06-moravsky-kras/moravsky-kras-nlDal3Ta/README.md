@@ -16,6 +16,14 @@ Moravský kras v roce 1922
 
 https://m.facebook.com/groups/blanenstaci/permalink/1226073991411205/
 
-## Přílohy
+## Přílohy (5)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1691386040083.jpg](01-fb-img-1691386040083.jpg)
+
+![FB_IMG_1691386037103.jpg](02-fb-img-1691386037103.jpg)
+
+![FB_IMG_1691386034477.jpg](03-fb-img-1691386034477.jpg)
+
+![FB_IMG_1691386029524.jpg](04-fb-img-1691386029524.jpg)
+
+![FB_IMG_1691386026328.jpg](05-fb-img-1691386026328.jpg)

@@ -3,40 +3,40 @@
 [← zpět na board](../README.md)
 
 - [Motokáry na 9 květnu](motokary-na-9-kvetnu-qxpiiwQx/README.md)
-- [Zborovce Cihelna](zborovce-cihelna-oeuOmmR0/README.md)
-- [Můstek hořice](mustek-horice-VDGCQPQ1/README.md)
-- [Obřadní síň](obradni-sin-Pgxrk5oI/README.md)
-- [Skleníky, OC Poříčí](skleniky-oc-porici-vbs4MOww/README.md)
-- [záplavy 1947](zaplavy-1947-sU62OnD4/README.md)
-- [Cvičení Metra Blansko hriste](cviceni-metra-blansko-hriste-vMSnwvcv/README.md)
-- [Medník](mednik-sZobGmhZ/README.md)
-- [dolnolhotská chata](dolnolhotska-chata-tO8u16J0/README.md)
-- [Memoriál Rudy Toufara 1953 moto](memorial-rudy-toufara-1953-moto-ljoPih8W/README.md)
-- [Čertovka motokros](certovka-motokros-DHLtPqYO/README.md)
-- [Motokros čertovka 1960-1965](motokros-certovka-1960-1965-iRhy0G0R/README.md)
-- [1. Máj 1958](1-maj-1958-c3BgYp9w/README.md)
-- [Okresní tělovýchovné slavnosti 1973](okresni-telovychovne-slavnosti-1973-g4qPFK4a/README.md)
-- [2. klamovka](2-klamovka-hvzT42i8/README.md)
-- [OSVOBOZENÍ BLANSKA. 16.5.1945 - PŘÍJEZD PRESIDENTA Dr. EDVARDA BENEŠE DO BLANSKA NA SVÉ CESTĚ DO PRAHY.](osvobozeni-blanska-16-5-1945-prijezd-presidenta-dr-SuWilmnC/README.md)
-- [Pohlednice Blanska](pohlednice-blanska-ET9UJyvB/README.md)
-- [Samoobsluha u policie](samoobsluha-u-policie-6oUmKThc/README.md)
-- [Nejezchlebova cihelna](nejezchlebova-cihelna-QCEqIgCq/README.md)
-- [Hájíček nad Rájcem](hajicek-nad-rajcem-WrTMHos9/README.md)
-- [Fotbalove hřiště](fotbalove-hriste-IjpG0jEi/README.md)
-- [Kamenolom Blansko](kamenolom-blansko-Um1bR6vl/README.md)
-- [Sanatorka a Bazen](sanatorka-a-bazen-HaS0d5Pr/README.md)
-- [Likusak pod Sanatorkou](likusak-pod-sanatorkou-HJtJEuc0/README.md)
-- [Vlakové nádraží](vlakove-nadrazi-u40aexhD/README.md)
-- [Pohled na Blansko 1985](pohled-na-blansko-1985-GKsohTXR/README.md)
-- [Nádraží Blansko](nadrazi-blansko-2UKfU6fo/README.md)
-- [Mariánská huť](marianska-hut-BgaUg74j/README.md)
-- [Karel Mayer a synové](karel-mayer-a-synove-y9CGsRKO/README.md)
-- [řeznictví Bayer](reznictvi-bayer-CinqjqL7/README.md)
-- [Vzpomínka na Zdenka Táborského](vzpominka-na-zdenka-taborskeho-fDbeSFKw/README.md)
-- [BLANSKO HISTORICKÉ. TRADIČNÍ ZÁVODY MOTOREK V BLANSKU - ROK 1949.](blansko-historicke-tradicni-zavody-motorek-v-blans-0eNLlbhr/README.md)
-- [Školy v Blansku](skoly-v-blansku-cyt8kNh3/README.md)
-- [Bruslení](brusleni-PWfVYoSE/README.md)
-- [Stará poliklinika,dnes vlevo výškáče,zahradu pamatuji,foto opravdu historické.](stara-poliklinika-dnes-vlevo-vyskace-zahradu-pamat-DDjm8o99/README.md)
-- [Nová továrna ve Sloupečníku na kachlová kamna](nova-tovarna-ve-sloupecniku-na-kachlova-kamna-7fsxjrHq/README.md)
-- [Klamova huť lidově zvaná Klamovka](klamova-hut-lidove-zvana-klamovka-DiVKB7RQ/README.md)
-- [Kamenolom byl založen roku 1925 a rozšířen v roce 1926. Vlastníkem lomu se stal Milan Vuletič. V 70. letech 20. století byl zatopen vodou, na dně zůstala i důlní technika-vozíky, koleje, zábradlí. Maximální hloubka je osmnáct metrů. Pozemek kolem lomu patřil Českým drahám. Na plot jim chyběly peníze. Jako nepotřebný majetek získal pozemek od Českých drah soukromý majitel.](kamenolom-byl-zalozen-roku-1925-a-rozsiren-v-roce-xuXILXHH/README.md)
+- [Zborovce Cihelna](zborovce-cihelna-oeuOmmR0/README.md) · 28 příloh
+- [Můstek hořice](mustek-horice-VDGCQPQ1/README.md) · 9 příloh
+- [Obřadní síň](obradni-sin-Pgxrk5oI/README.md) · 9 příloh
+- [Skleníky, OC Poříčí](skleniky-oc-porici-vbs4MOww/README.md) · 15 příloh
+- [záplavy 1947](zaplavy-1947-sU62OnD4/README.md) · 16 příloh
+- [Cvičení Metra Blansko hriste](cviceni-metra-blansko-hriste-vMSnwvcv/README.md) · 38 příloh
+- [Medník](mednik-sZobGmhZ/README.md) · 4 příloh
+- [dolnolhotská chata](dolnolhotska-chata-tO8u16J0/README.md) · 4 příloh
+- [Memoriál Rudy Toufara 1953 moto](memorial-rudy-toufara-1953-moto-ljoPih8W/README.md) · 52 příloh
+- [Čertovka motokros](certovka-motokros-DHLtPqYO/README.md) · 8 příloh
+- [Motokros čertovka 1960-1965](motokros-certovka-1960-1965-iRhy0G0R/README.md) · 5 příloh
+- [1. Máj 1958](1-maj-1958-c3BgYp9w/README.md) · 10 příloh
+- [Okresní tělovýchovné slavnosti 1973](okresni-telovychovne-slavnosti-1973-g4qPFK4a/README.md) · 6 příloh
+- [2. klamovka](2-klamovka-hvzT42i8/README.md) · 4 příloh
+- [OSVOBOZENÍ BLANSKA. 16.5.1945 - PŘÍJEZD PRESIDENTA Dr. EDVARDA BENEŠE DO BLANSKA NA SVÉ CESTĚ DO PRAHY.](osvobozeni-blanska-16-5-1945-prijezd-presidenta-dr-SuWilmnC/README.md) · 19 příloh
+- [Pohlednice Blanska](pohlednice-blanska-ET9UJyvB/README.md) · 18 příloh
+- [Samoobsluha u policie](samoobsluha-u-policie-6oUmKThc/README.md) · 1 příloh
+- [Nejezchlebova cihelna](nejezchlebova-cihelna-QCEqIgCq/README.md) · 6 příloh
+- [Hájíček nad Rájcem](hajicek-nad-rajcem-WrTMHos9/README.md) · 4 příloh
+- [Fotbalove hřiště](fotbalove-hriste-IjpG0jEi/README.md) · 1 příloh
+- [Kamenolom Blansko](kamenolom-blansko-Um1bR6vl/README.md) · 10 příloh
+- [Sanatorka a Bazen](sanatorka-a-bazen-HaS0d5Pr/README.md) · 2 příloh
+- [Likusak pod Sanatorkou](likusak-pod-sanatorkou-HJtJEuc0/README.md) · 1 příloh
+- [Vlakové nádraží](vlakove-nadrazi-u40aexhD/README.md) · 1 příloh
+- [Pohled na Blansko 1985](pohled-na-blansko-1985-GKsohTXR/README.md) · 2 příloh
+- [Nádraží Blansko](nadrazi-blansko-2UKfU6fo/README.md) · 1 příloh
+- [Mariánská huť](marianska-hut-BgaUg74j/README.md) · 3 příloh
+- [Karel Mayer a synové](karel-mayer-a-synove-y9CGsRKO/README.md) · 3 příloh
+- [řeznictví Bayer](reznictvi-bayer-CinqjqL7/README.md) · 3 příloh
+- [Vzpomínka na Zdenka Táborského](vzpominka-na-zdenka-taborskeho-fDbeSFKw/README.md) · 9 příloh
+- [BLANSKO HISTORICKÉ. TRADIČNÍ ZÁVODY MOTOREK V BLANSKU - ROK 1949.](blansko-historicke-tradicni-zavody-motorek-v-blans-0eNLlbhr/README.md) · 3 příloh
+- [Školy v Blansku](skoly-v-blansku-cyt8kNh3/README.md) · 12 příloh
+- [Bruslení](brusleni-PWfVYoSE/README.md) · 3 příloh
+- [Stará poliklinika,dnes vlevo výškáče,zahradu pamatuji,foto opravdu historické.](stara-poliklinika-dnes-vlevo-vyskace-zahradu-pamat-DDjm8o99/README.md) · 1 příloh
+- [Nová továrna ve Sloupečníku na kachlová kamna](nova-tovarna-ve-sloupecniku-na-kachlova-kamna-7fsxjrHq/README.md) · 1 příloh
+- [Klamova huť lidově zvaná Klamovka](klamova-hut-lidove-zvana-klamovka-DiVKB7RQ/README.md) · 3 příloh
+- [Kamenolom byl založen roku 1925 a rozšířen v roce 1926. Vlastníkem lomu se stal Milan Vuletič. V 70. letech 20. století byl zatopen vodou, na dně zůstala i důlní technika-vozíky, koleje, zábradlí. Maximální hloubka je osmnáct metrů. Pozemek kolem lomu patřil Českým drahám. Na plot jim chyběly peníze. Jako nepotřebný majetek získal pozemek od Českých drah soukromý majitel.](kamenolom-byl-zalozen-roku-1925-a-rozsiren-v-roce-xuXILXHH/README.md) · 9 příloh

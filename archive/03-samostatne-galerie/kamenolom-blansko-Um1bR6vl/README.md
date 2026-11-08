@@ -16,6 +16,24 @@ Jako nepotřebný majetek získal pozemek od Českých drah soukromý majitel.
 
 Pavel Svoboda na FB 16.8.24
 
-## Přílohy
+## Přílohy (10)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![fotka.jpeg](01-fotka.jpeg)
+
+![fotka.jpeg](02-fotka.jpeg)
+
+![fotka.jpeg](03-fotka.jpeg)
+
+![fotka.jpeg](04-fotka.jpeg)
+
+![fotka.jpeg](05-fotka.jpeg)
+
+![fotka.jpeg](06-fotka.jpeg)
+
+![fotka.jpeg](07-fotka.jpeg)
+
+![fotka.jpeg](08-fotka.jpeg)
+
+![fotka.jpeg](09-fotka.jpeg)
+
+![fotka.jpeg](10-fotka.jpeg)

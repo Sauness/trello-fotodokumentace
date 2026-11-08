@@ -14,6 +14,10 @@ Macocha 1922
 
 https://m.facebook.com/groups/blanenstaci/permalink/1238629546822316/
 
-## Přílohy
+## Přílohy (3)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1693838436724.jpg](01-fb-img-1693838436724.jpg)
+
+![FB_IMG_1693838438862.jpg](02-fb-img-1693838438862.jpg)
+
+![FB_IMG_1693838441007.jpg](03-fb-img-1693838441007.jpg)

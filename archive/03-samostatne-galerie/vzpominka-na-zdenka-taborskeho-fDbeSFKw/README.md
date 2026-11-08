@@ -20,6 +20,22 @@ Zdeněk Táborský měl dvě velké dlouholeté lásky. Malování a literární
 
 Buď sbohem, řeko má, zas zítra na shledanou, až nový den dá barvy do tvých dlaní, já přijdu zas, jak pytlák na čekanou zachytit krásu tvou v oparu za svítání. (Zdeněk Táborský, Svitavě).
 
-## Přílohy
+## Přílohy (9)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![fotka.jpeg](01-fotka.jpeg)
+
+![fotka.jpeg](02-fotka.jpeg)
+
+![fotka.jpeg](03-fotka.jpeg)
+
+![fotka.jpeg](04-fotka.jpeg)
+
+![fotka.jpeg](05-fotka.jpeg)
+
+![fotka.jpeg](06-fotka.jpeg)
+
+![fotka.jpeg](07-fotka.jpeg)
+
+![fotka.jpeg](08-fotka.jpeg)
+
+![fotka.jpeg](09-fotka.jpeg)

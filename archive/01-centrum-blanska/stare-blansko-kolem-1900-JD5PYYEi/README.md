@@ -12,6 +12,6 @@ Blanenské hospody do roku 1989, takový bude název publikace, kterou připravu
 
 NA FOTOGRAFII KOLEM ROKU 1900 JE JEDNA BLANENSKÁ RESTAURACE. JDE O TŘETÍ BUVOVU ZLEVA. POZNÁTE JI?
 
-## Přílohy
+## Přílohy (1)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![fotka.jpeg](01-fotka.jpeg)

@@ -37,6 +37,12 @@ S mými kamarády jsem se zúčastnil na Medníku několika potlachů, které se
 
 Tolik asi z mých vzpomínek. V příloze Ti posílám nějaké fotky a list z mého starého „cancáku“, kam mi Meddy napsal v upomínku pár veršíků. Za kvalitu fotek se omlouvám, lepší jsem nesehnal.
 
-## Přílohy
+## Přílohy (4)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![image.png](01-image.png)
+
+![image.png](02-image.png)
+
+![image.png](03-image.png)
+
+![image.png](04-image.png)

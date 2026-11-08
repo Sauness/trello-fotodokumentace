@@ -12,6 +12,6 @@ Slavností průvod při otevření nového hřiště 6. a 7. 1931 🙂 Uhodnete,
 
 https://m.facebook.com/story.php?story_fbid=pfbid0QpY8CLz3YHcjTxFTWgGDCFs9Pbeo73LWinpnrXMEjAEVuVooKxNbH3XEHaKtzTUKl&id=100064060271548
 
-## Přílohy
+## Přílohy (1)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1698926367017.jpg](01-fb-img-1698926367017.jpg)

@@ -9,6 +9,6 @@
 
 BLANSKO HISTORICKÉ? VZÁCNÁ FOTOGRAFIE BLANENSKÉHO NÁDRAŽÍ, NEVÍM ROK POŘÍZENÍ FOTOGRAFIE.
 
-## Přílohy
+## Přílohy (1)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![fotka.jpeg](01-fotka.jpeg)

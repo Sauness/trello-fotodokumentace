@@ -16,6 +16,14 @@ Průzkum jeskyní
 Skalní okna
 Masarykův dóm
 
-## Přílohy
+## Přílohy (5)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1691992420846.jpg](01-fb-img-1691992420846.jpg)
+
+![FB_IMG_1691992418252.jpg](02-fb-img-1691992418252.jpg)
+
+![FB_IMG_1691992415556.jpg](03-fb-img-1691992415556.jpg)
+
+![FB_IMG_1691992413446.jpg](04-fb-img-1691992413446.jpg)
+
+![FB_IMG_1691992411390.jpg](05-fb-img-1691992411390.jpg)

@@ -11,6 +11,6 @@ Blanenský zámek v první čtvrtině 20. století
 
 https://m.facebook.com/story.php?story_fbid=pfbid02arWin2JxqCeqQehZYEWS9SamoiiyShvStSpCEJNC4iQ6gQbyGWxcgPhHpPFaYQ76l&id=100004037288742
 
-## Přílohy
+## Přílohy (1)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1698387909782.jpg](01-fb-img-1698387909782.jpg)

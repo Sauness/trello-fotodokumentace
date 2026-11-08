@@ -12,6 +12,10 @@ KAREL MAYER A SYNOVÉ                                                           
 
 FB Pavel Svoboda
 
-## Přílohy
+## Přílohy (3)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![fotka.jpeg](01-fotka.jpeg)
+
+![fotka.jpeg](02-fotka.jpeg)
+
+![fotka.jpeg](03-fotka.jpeg)

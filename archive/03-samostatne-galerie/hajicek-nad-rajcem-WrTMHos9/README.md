@@ -9,6 +9,12 @@
 
 https://www.facebook.com/groups/blanenstaci/permalink/1265126330839304/
 
-## Přílohy
+## Přílohy (4)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1698493220606.jpg](01-fb-img-1698493220606.jpg)
+
+![FB_IMG_1698493223140.jpg](02-fb-img-1698493223140.jpg)
+
+![FB_IMG_1698493225639.jpg](03-fb-img-1698493225639.jpg)
+
+![FB_IMG_1698493227829.jpg](04-fb-img-1698493227829.jpg)

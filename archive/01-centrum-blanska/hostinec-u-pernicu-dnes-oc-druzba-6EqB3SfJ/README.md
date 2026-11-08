@@ -9,6 +9,8 @@
 
 https://www.facebook.com/100000693658413/posts/pfbid02LdHad4Ds2X6Syp33a5Lz8jptyYzET2GVoHQuAgnY8AAut1gXQ7S4S5FbYmYiwn55l/
 
-## Přílohy
+## Přílohy (2)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1692974378711.jpg](01-fb-img-1692974378711.jpg)
+
+![FB_IMG_1692974381021.jpg](02-fb-img-1692974381021.jpg)

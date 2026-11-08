@@ -13,6 +13,10 @@ Kdo zná dobře Blansko, jistě ví, kde se psi dnes nacházejí.
  
 FB Hana Novakova Blanenstaci
 
-## Přílohy
+## Přílohy (3)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![fotka.jpeg](01-fotka.jpeg)
+
+![fotka.jpeg](02-fotka.jpeg)
+
+![fotka.jpeg](03-fotka.jpeg)

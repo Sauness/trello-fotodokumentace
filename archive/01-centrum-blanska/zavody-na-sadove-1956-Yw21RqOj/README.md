@@ -11,6 +11,10 @@ https://www.facebook.com/groups/blanenstaci/permalink/1122454555106483/
 
 Tonda Limpert
 
-## Přílohy
+## Přílohy (3)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1683087963558.jpg](01-fb-img-1683087963558.jpg)
+
+![FB_IMG_1683087961331.jpg](02-fb-img-1683087961331.jpg)
+
+![FB_IMG_1683087958855.jpg](03-fb-img-1683087958855.jpg)

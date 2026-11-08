@@ -5,6 +5,8 @@
 
 [← zpět na list](../README.md)
 
-## Přílohy
+## Přílohy (2)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![uuid=092D6A8B-FA22-49CA-A8A4-98DD502986EC&library=1&type=1&mode=1&loc=true&cap=true.jpeg](01-uuid-3d092d6a8b-fa22-49ca-a8a4-98dd502986ec-26library-3d1-26.jpeg)
+
+![image.png](02-image.png)

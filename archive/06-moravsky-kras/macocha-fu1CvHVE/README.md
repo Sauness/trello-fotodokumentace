@@ -14,6 +14,10 @@ Macocha počátkem 20. let.
 
 https://www.facebook.com/groups/blanenstaci/permalink/1248477749170829/
 
-## Přílohy
+## Přílohy (3)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![FB_IMG_1696058626208.jpg](01-fb-img-1696058626208.jpg)
+
+![FB_IMG_1696058629091.jpg](02-fb-img-1696058629091.jpg)
+
+![FB_IMG_1696058631531.jpg](03-fb-img-1696058631531.jpg)

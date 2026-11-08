@@ -5,6 +5,11 @@
 
 [← zpět na list](../README.md)
 
-## Přílohy
+## Seznam
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+
+## Přílohy (2)
+
+![fotka.jpeg](01-fotka.jpeg)
+
+![fotka.jpeg](02-fotka.jpeg)

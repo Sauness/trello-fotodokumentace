@@ -2,54 +2,54 @@
 
 [← zpět na board](../README.md)
 
-- [Průvod Rožmitálova 1955](pruvod-rozmitalova-1955-ziKE2WBf/README.md)
-- [Ulice Úzká, centrum](ulice-uzka-centrum-6sePbMIn/README.md)
-- [Růžová ulička](ruzova-ulicka-RKMwd0tY/README.md)
-- [Závody na Sadové 1956](zavody-na-sadove-1956-Yw21RqOj/README.md)
-- [JZD Blansko](jzd-blansko-QHRh7vOb/README.md)
-- [Hostinec u Perniců, dnes OC Družba](hostinec-u-pernicu-dnes-oc-druzba-6EqB3SfJ/README.md)
-- [Námestí Republiky](namesti-republiky-lki6TYD4/README.md)
-- [Centrum](centrum-90MiWqYg/README.md)
-- [Odhalování sochy Rudoarmějce 1955](odhalovani-sochy-rudoarmejce-1955-eWd9oFAK/README.md)
-- [Rožmitálova](rozmitalova-SSF5jQG7/README.md)
-- [Rožmitálova](rozmitalova-Z0ZkP2Kf/README.md)
-- [9. Květen ulice, 1958](9-kveten-ulice-1958-hzNIhPGr/README.md)
-- [Most 1945](most-1945-vpj0uxgl/README.md)
-- [Stare Blansko](stare-blansko-VjgjrZQ5/README.md)
-- [Podzámčí](podzamci-hLZ8gV5F/README.md)
-- [Náměstí svobody](namesti-svobody-kdMCO0FF/README.md)
-- [?](bez-nazvu-1PWnXEL4/README.md)
-- [Zámek](zamek-X0YuntJ4/README.md)
-- [Centrum 1972](centrum-1972-lEqNRjD3/README.md)
-- [centrum mix](centrum-mix-F1BM4GEw/README.md)
-- [Stará fabrika 1830](stara-fabrika-1830-aDFjNDjI/README.md)
-- [Staré Blansko dům Čelních](stare-blansko-dum-celnich-EMA4bRU9/README.md)
-- [Ježek](jezek-FvNKoORe/README.md)
-- [?](bez-nazvu-GXiofCWc/README.md)
-- [Občanská záložna](obcanska-zalozna-2yaR8rnc/README.md)
-- [Severka na severu](severka-na-severu-D6ienArg/README.md)
-- [Rozmitalka](rozmitalka-xCV2HF0J/README.md)
-- [Různé ulice 70 leta](ruzne-ulice-70-leta-9zYDDZKE/README.md)
-- [Pohled na centrum](pohled-na-centrum-IKSzPkmW/README.md)
-- [Spořitelna Blansko](sporitelna-blansko-y18SZkQS/README.md)
-- [Brána na náměstí pod zámkem](brana-na-namesti-pod-zamkem-8fmivJAo/README.md)
-- [Stavba bytovek na Žižkově ulici](stavba-bytovek-na-zizkove-ulici-QvAy3CaP/README.md)
-- [centrum mix](centrum-mix-EcvRVXZU/README.md)
-- [Ježkův most](jezkuv-most-0YQmszdY/README.md)
-- [BLANSKO 60. LÉTA 20. STOLETÍ](blansko-60-leta-20-stoleti-U9T4ORAt/README.md)
-- [Po 17. Listopadu 1989](po-17-listopadu-1989-RqsJT2QN/README.md)
-- [Staré Blansko kolem 1900](stare-blansko-kolem-1900-JD5PYYEi/README.md)
-- [Širší centrum Blansko 1960](sirsi-centrum-blansko-1960-aZ7L1Al7/README.md)
-- [Špitál (Tiro)](spital-tiro-LH5IK5ZR/README.md)
-- [BLANSKO HISTORICKÉ - ROŽMITÁLKA V ROCE 1901](blansko-historicke-rozmitalka-v-roce-1901-mIKCOtxw/README.md)
-- [obrázek.jpeg](obrazek-jpeg-03Rh3hSN/README.md)
-- [OPĚT JEDNA HISTORICKÁ FOTOGRAFIE BLANSKA. BÝVALÁ JEŽKOVA STAVBA, BÝVALÁ POŠTA BLANSKO.](opet-jedna-historicka-fotografie-blanska-byvala-je-4t5eMSxW/README.md)
-- [image.png](image-png-rkKEuXxu/README.md)
-- [u zastávky ČSD, Rožmitálova ulice](u-zastavky-csd-rozmitalova-ulice-htSp7oIE/README.md)
-- [Rudé právo 14.června 1956](rude-pravo-14-cervna-1956-MjsRCS33/README.md)
-- [Žně 60.](zne-60-5bskt4tY/README.md)
-- [Boženy Němcové](bozeny-nemcove-kLsde4pp/README.md)
-- [Bowling](bowling-DBUS3bfS/README.md)
-- [Družba](druzba-5D8hg7IF/README.md)
-- [A ještě historické foto Blanska - rok 1986 a 1987, sídliště Zborovce, kolotoče u Sýpky a luxusní prodejna Eso - spodní část Rožmitálky u vlakové zastávky  (dnes prodejna obuvi a dárkových předmětů)](a-jeste-historicke-foto-blanska-rok-1986-a-1987-si-DnYr810h/README.md)
-- [Masarykuv dun](masarykuv-dun-g9C53kkU/README.md)
+- [Průvod Rožmitálova 1955](pruvod-rozmitalova-1955-ziKE2WBf/README.md) · 11 příloh
+- [Ulice Úzká, centrum](ulice-uzka-centrum-6sePbMIn/README.md) · 1 příloh
+- [Růžová ulička](ruzova-ulicka-RKMwd0tY/README.md) · 16 příloh
+- [Závody na Sadové 1956](zavody-na-sadove-1956-Yw21RqOj/README.md) · 3 příloh
+- [JZD Blansko](jzd-blansko-QHRh7vOb/README.md) · 7 příloh
+- [Hostinec u Perniců, dnes OC Družba](hostinec-u-pernicu-dnes-oc-druzba-6EqB3SfJ/README.md) · 2 příloh
+- [Námestí Republiky](namesti-republiky-lki6TYD4/README.md) · 13 příloh
+- [Centrum](centrum-90MiWqYg/README.md) · 9 příloh
+- [Odhalování sochy Rudoarmějce 1955](odhalovani-sochy-rudoarmejce-1955-eWd9oFAK/README.md) · 10 příloh
+- [Rožmitálova](rozmitalova-SSF5jQG7/README.md) · 1 příloh
+- [Rožmitálova](rozmitalova-Z0ZkP2Kf/README.md) · 3 příloh
+- [9. Květen ulice, 1958](9-kveten-ulice-1958-hzNIhPGr/README.md) · 1 příloh
+- [Most 1945](most-1945-vpj0uxgl/README.md) · 1 příloh
+- [Stare Blansko](stare-blansko-VjgjrZQ5/README.md) · 3 příloh
+- [Podzámčí](podzamci-hLZ8gV5F/README.md) · 3 příloh
+- [Náměstí svobody](namesti-svobody-kdMCO0FF/README.md) · 17 příloh
+- [?](bez-nazvu-1PWnXEL4/README.md) · 1 příloh
+- [Zámek](zamek-X0YuntJ4/README.md) · 1 příloh
+- [Centrum 1972](centrum-1972-lEqNRjD3/README.md) · 2 příloh
+- [centrum mix](centrum-mix-F1BM4GEw/README.md) · 7 příloh
+- [Stará fabrika 1830](stara-fabrika-1830-aDFjNDjI/README.md) · 1 příloh
+- [Staré Blansko dům Čelních](stare-blansko-dum-celnich-EMA4bRU9/README.md) · 1 příloh
+- [Ježek](jezek-FvNKoORe/README.md) · 1 příloh
+- [?](bez-nazvu-GXiofCWc/README.md) · 1 příloh
+- [Občanská záložna](obcanska-zalozna-2yaR8rnc/README.md) · 1 příloh
+- [Severka na severu](severka-na-severu-D6ienArg/README.md) · 1 příloh
+- [Rozmitalka](rozmitalka-xCV2HF0J/README.md) · 1 příloh
+- [Různé ulice 70 leta](ruzne-ulice-70-leta-9zYDDZKE/README.md) · 2 příloh
+- [Pohled na centrum](pohled-na-centrum-IKSzPkmW/README.md) · 1 příloh
+- [Spořitelna Blansko](sporitelna-blansko-y18SZkQS/README.md) · 1 příloh
+- [Brána na náměstí pod zámkem](brana-na-namesti-pod-zamkem-8fmivJAo/README.md) · 1 příloh
+- [Stavba bytovek na Žižkově ulici](stavba-bytovek-na-zizkove-ulici-QvAy3CaP/README.md) · 1 příloh
+- [centrum mix](centrum-mix-EcvRVXZU/README.md) · 7 příloh
+- [Ježkův most](jezkuv-most-0YQmszdY/README.md) · 1 příloh
+- [BLANSKO 60. LÉTA 20. STOLETÍ](blansko-60-leta-20-stoleti-U9T4ORAt/README.md) · 3 příloh
+- [Po 17. Listopadu 1989](po-17-listopadu-1989-RqsJT2QN/README.md) · 5 příloh
+- [Staré Blansko kolem 1900](stare-blansko-kolem-1900-JD5PYYEi/README.md) · 1 příloh
+- [Širší centrum Blansko 1960](sirsi-centrum-blansko-1960-aZ7L1Al7/README.md) · 14 příloh
+- [Špitál (Tiro)](spital-tiro-LH5IK5ZR/README.md) · 1 příloh
+- [BLANSKO HISTORICKÉ - ROŽMITÁLKA V ROCE 1901](blansko-historicke-rozmitalka-v-roce-1901-mIKCOtxw/README.md) · 1 příloh
+- [obrázek.jpeg](obrazek-jpeg-03Rh3hSN/README.md) · 1 příloh
+- [OPĚT JEDNA HISTORICKÁ FOTOGRAFIE BLANSKA. BÝVALÁ JEŽKOVA STAVBA, BÝVALÁ POŠTA BLANSKO.](opet-jedna-historicka-fotografie-blanska-byvala-je-4t5eMSxW/README.md) · 1 příloh
+- [image.png](image-png-rkKEuXxu/README.md) · 1 příloh
+- [u zastávky ČSD, Rožmitálova ulice](u-zastavky-csd-rozmitalova-ulice-htSp7oIE/README.md) · 1 příloh
+- [Rudé právo 14.června 1956](rude-pravo-14-cervna-1956-MjsRCS33/README.md) · 1 příloh
+- [Žně 60.](zne-60-5bskt4tY/README.md) · 1 příloh
+- [Boženy Němcové](bozeny-nemcove-kLsde4pp/README.md) · 1 příloh
+- [Bowling](bowling-DBUS3bfS/README.md) · 1 příloh
+- [Družba](druzba-5D8hg7IF/README.md) · 1 příloh
+- [A ještě historické foto Blanska - rok 1986 a 1987, sídliště Zborovce, kolotoče u Sýpky a luxusní prodejna Eso - spodní část Rožmitálky u vlakové zastávky  (dnes prodejna obuvi a dárkových předmětů)](a-jeste-historicke-foto-blanska-rok-1986-a-1987-si-DnYr810h/README.md) · 3 příloh
+- [Masarykuv dun](masarykuv-dun-g9C53kkU/README.md) · 1 příloh

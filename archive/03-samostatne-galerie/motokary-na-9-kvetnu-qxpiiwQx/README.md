@@ -5,6 +5,4 @@
 
 [← zpět na list](../README.md)
 
-## Přílohy
-
-_Zatím nestaženo – doplní workflow „Trello export“._
+## Přílohy (0)

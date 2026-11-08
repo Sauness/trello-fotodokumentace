@@ -5,6 +5,12 @@
 
 [← zpět na list](../README.md)
 
-## Přílohy
+## Přílohy (4)
 
-_Zatím nestaženo – doplní workflow „Trello export“._
+![Screenshot_20221018-212615_Chrome.jpg](01-screenshot-20221018-212615-chrome.jpg)
+
+![Screenshot_20221018-212553_Chrome.jpg](02-screenshot-20221018-212553-chrome.jpg)
+
+![Screenshot_20221018-212615_Chrome.jpg](03-screenshot-20221018-212615-chrome.jpg)
+
+![Screenshot_20221018-212553_Chrome.jpg](04-screenshot-20221018-212553-chrome.jpg)
