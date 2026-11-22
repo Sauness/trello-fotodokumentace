@@ -260,6 +260,7 @@ footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-
 
   .placer-head { flex-wrap: nowrap; padding: 8px 10px 8px 14px; gap: 8px; }
   .placer-head .t { flex: 1 1 auto; font-size: 14px; }
+  .placer-head .num { white-space: nowrap; }
   .placer-head .btn { padding: 7px 12px; }
   .placer-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: var(--ph, 26%) minmax(0, 1fr); }
   .placer-body.photo-big { --ph: 58%; }
@@ -661,10 +662,10 @@ function wireLightbox() {
     const fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;   // keep the tapped spot in view
     st.classList.toggle("zoomed");
     if (st.classList.contains("zoomed")) {
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         st.scrollLeft = Math.max(0, img.offsetWidth * fx - st.clientWidth / 2);
         st.scrollTop = Math.max(0, img.offsetHeight * fy - st.clientHeight / 2);
-      });
+      }, 0);
     }
   });
   let x0 = null;
