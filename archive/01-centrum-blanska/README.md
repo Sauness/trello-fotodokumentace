@@ -53,3 +53,4 @@
 - [Družba](druzba-5D8hg7IF/README.md) · 1 příloh
 - [A ještě historické foto Blanska - rok 1986 a 1987, sídliště Zborovce, kolotoče u Sýpky a luxusní prodejna Eso - spodní část Rožmitálky u vlakové zastávky  (dnes prodejna obuvi a dárkových předmětů)](a-jeste-historicke-foto-blanska-rok-1986-a-1987-si-DnYr810h/README.md) · 3 příloh
 - [Masarykuv dun](masarykuv-dun-g9C53kkU/README.md) · 1 příloh
+- [Pohled na Blansko](pohled-na-blansko-4GS3iiu1/README.md) · 1 příloh
