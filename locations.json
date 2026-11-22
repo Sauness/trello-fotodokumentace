@@ -1,0 +1,4 @@
+{
+  "about": "Polohy fotek na mapě. Klíč = ID přílohy v Trellu. camera = odkud bylo foceno, target = co je na fotce; [lat, lng] ve WGS84 nebo null. Upravuje se z galerie (režim úprav).",
+  "photos": {}
+}

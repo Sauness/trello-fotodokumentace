@@ -205,6 +205,7 @@ def render(board: dict, out: Path, client: Trello | None) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     stats = {"lists": 0, "cards": 0, "files": 0, "downloaded": 0, "links": 0}
     keep_dirs: set[Path] = set()
+    att_index: dict[str, list] = {}   # shortLink -> [{id, file, name}], stable keys for locations.json
     board_lines = [f"# {board['name']}", "", f"Export z Trella: <{board['url']}>", "",
                    "| List | Karet |", "|---|---|"]
 
@@ -235,6 +236,9 @@ def render(board: dict, out: Path, client: Trello | None) -> dict:
                     if a.get("isUpload"):
                         fname = f"{ai:02d}-{safe_filename(a.get('fileName') or a.get('name') or 'soubor')}"
                         wanted.add(fname)
+                        if a.get("id"):
+                            att_index.setdefault(sl, []).append(
+                                {"id": a["id"], "file": fname, "name": a.get("name") or ""})
                         dest = cdir / fname
                         stats["files"] += 1
                         if client and not (dest.exists() and (not a.get("bytes") or dest.stat().st_size == a["bytes"])):
@@ -289,6 +293,10 @@ def render(board: dict, out: Path, client: Trello | None) -> dict:
     for p in out.glob("*"):
         if p.is_dir() and p not in keep_dirs:
             shutil.rmtree(p)
+
+    if client:  # live mode only; offline dumps carry no attachment ids
+        (out / "attachments.json").write_text(
+            json.dumps(att_index, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8")
 
     board_lines += ["", f"Celkem {stats['cards']} karet."]
     (out / "README.md").write_text("\n".join(board_lines) + "\n", encoding="utf-8")

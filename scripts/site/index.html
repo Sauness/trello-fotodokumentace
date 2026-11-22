@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
 /* Layout: archive reading room — sticky filter bar over a contact-sheet grid; card detail and lightbox as overlays. */
 :root {
@@ -22,6 +24,8 @@
   --accent-soft: #dbe6f1;
   --on-accent: #ffffff;
   --shade: rgba(10, 14, 18, .94);
+  --pin: #c8432b;         /* photographed place; same in both themes, sits on map tiles */
+  --cam: #1a2026;         /* photographer's standpoint */
   --f-display: "Literata", Georgia, "Times New Roman", serif;
   --f-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
@@ -153,6 +157,59 @@ h3 { font: 500 12px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppe
 .lb-bottom .cap { color: #d9dee2; overflow-wrap: anywhere; }
 .lb-bottom .card-name { color: #aab4bd; font-size: 13px; }
 
+/* map view */
+.mapview { padding-block: 20px 48px; }
+.map-head { display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: baseline; margin-bottom: 12px; color: var(--muted); font-size: 13px; }
+.map-head b { color: var(--fg); font-weight: 500; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; }
+.legend i { display: inline-block; vertical-align: middle; margin-right: 6px; }
+.lg-target { width: 11px; height: 11px; border-radius: 50%; background: var(--pin); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--pin); }
+.lg-camera { width: 9px; height: 9px; border-radius: 50%; background: var(--surface); border: 2px solid var(--cam); }
+.lg-line { width: 22px; height: 0; border-top: 2px solid var(--pin); }
+#map { height: min(72vh, 760px); min-height: 360px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--sunk); }
+.leaflet-container { font: 13px/1.4 var(--f-body); }
+.leaflet-popup-content { margin: 10px; }
+.pop { display: grid; gap: 6px; width: 200px; }
+.pop img { width: 200px; height: 140px; object-fit: cover; border-radius: 4px; background: var(--sunk); cursor: pointer; }
+.pop .t { font-weight: 600; line-height: 1.25; }
+.pop .s { color: #5a6670; font-size: 12px; }
+.wall button.has-loc::after { content: ""; position: absolute; right: 6px; bottom: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--pin); border: 2px solid #fff; }
+
+/* edit mode */
+.editbar { display: none; align-items: center; gap: 10px; font-size: 13px; padding: 6px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--fg); }
+.editing .editbar { display: inline-flex; }
+.lb-top .lb-act { border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.08); color: #eef1f3; border-radius: var(--radius); padding: 5px 10px; cursor: pointer; font-size: 13px; }
+.lb-top .lb-act:hover { background: rgba(255,255,255,.18); }
+.lb-top .lb-act.primary { background: #c8432b; border-color: #c8432b; color: #fff; }
+
+.modal { position: fixed; inset: 0; z-index: 50; background: rgba(10,14,18,.55); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.dialog { background: var(--surface); color: var(--fg); border-radius: 10px; width: min(520px, 100%); max-height: 100%; overflow-y: auto; padding: 22px; display: grid; gap: 14px; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+.dialog h2 { font: 600 22px/1.2 var(--f-display); margin: 0; }
+.dialog ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.dialog input { width: 100%; padding: 9px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); color: var(--fg); font: 13px var(--f-mono); }
+.dialog .row { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn:disabled { opacity: .5; cursor: default; }
+.err { color: #b3261e; font-size: 13px; }
+.small { font-size: 13px; color: var(--muted); }
+
+.placer { position: fixed; inset: 0; z-index: 40; background: var(--bg); display: grid; grid-template-rows: auto minmax(0, 1fr) auto; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
+.placer-head, .placer-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 16px; border-bottom: 1px solid var(--line); min-width: 0; }
+.placer-foot { border-bottom: 0; border-top: 1px solid var(--line); }
+.placer-head .t { font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1 1 200px; }
+.placer-body { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); min-height: 0; }
+.placer-photo { background: #0e1114; position: relative; min-height: 0; }
+.placer-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+#pmap { min-height: 0; height: 100%; }
+.pt { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); padding: 7px 12px; cursor: pointer; }
+.pt[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.pt .state { font: 12px var(--f-mono); color: var(--muted); }
+.pt .x { border: 0; background: none; color: var(--muted); cursor: pointer; padding: 0 2px; font-size: 14px; }
+.placer-foot .spacer { flex: 1; }
+.hint { font-size: 13px; color: var(--muted); }
+
+.toast { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: 14px; max-width: calc(100% - 32px); box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+
 footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-top: 1px solid var(--line); }
 
 @media (max-width: 640px) {
@@ -160,6 +217,8 @@ footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .card .body { padding: 8px 9px 10px; }
   .wall { --h: 110px; }
+  .placer-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 2fr) minmax(0, 3fr); }
+  #map { height: 70vh; }
   .lb-stage img { left: 4px; right: 4px; width: calc(100% - 8px); }
   .lb-nav { display: none; }
   .timeline .labels span:nth-child(even) { visibility: hidden; }
@@ -185,7 +244,9 @@ footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-
       <div class="seg" role="group" aria-label="Zobrazení">
         <button id="v-cards" aria-pressed="true">Karty</button>
         <button id="v-photos" aria-pressed="false">Všechny fotky</button>
+        <button id="v-map" aria-pressed="false">Mapa</button>
       </div>
+      <span class="editbar" id="editbar">Režim úprav <button class="linkbtn" id="lock">Zamknout</button></span>
     </div>
     <div class="chips" id="chips" role="group" aria-label="Kategorie"></div>
     <div class="active-filter" id="active"></div>
@@ -193,6 +254,18 @@ footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-
 </div>
 
 <main class="wrap" id="main"><div class="empty">Načítám archiv…</div></main>
+
+<section class="wrap mapview" id="mapview" hidden aria-label="Mapa fotek">
+  <div class="map-head">
+    <span id="map-count"></span>
+    <span class="legend">
+      <span><i class="lg-target"></i>místo na fotce</span>
+      <span><i class="lg-camera"></i>stanoviště fotografa</span>
+      <span><i class="lg-line"></i>směr pohledu</span>
+    </span>
+  </div>
+  <div id="map"></div>
+</section>
 
 <footer class="wrap" id="foot"></footer>
 
@@ -202,6 +275,8 @@ footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-
   <div class="lb-top">
     <span class="count" id="lb-count"></span>
     <span class="spacer"></span>
+    <button class="lb-act" id="lb-onmap" hidden>Na mapě</button>
+    <button class="lb-act primary" id="lb-place" hidden>Umístit na mapu</button>
     <a id="lb-orig" target="_blank" rel="noopener">Originál</a>
     <button class="linkbtn" id="lb-card">Karta</button>
     <button class="lb-x" id="lb-x" aria-label="Zavřít">✕</button>
@@ -213,6 +288,49 @@ footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-
   </div>
   <div class="lb-bottom"><span class="cap" id="lb-cap"></span><span class="card-name" id="lb-cardname"></span></div>
 </div>
+
+<div class="placer" id="placer" hidden role="dialog" aria-modal="true" aria-label="Umístění fotky na mapu">
+  <div class="placer-head">
+    <span class="t" id="pl-title"></span>
+    <span class="small num" id="pl-count"></span>
+    <button class="btn" id="pl-close">Zavřít</button>
+  </div>
+  <div class="placer-body">
+    <div class="placer-photo"><img id="pl-img" alt=""></div>
+    <div id="pmap"></div>
+  </div>
+  <div class="placer-foot">
+    <span class="pt" id="pt-camera" role="button" tabindex="0" aria-pressed="true"><i class="lg-camera"></i>Odkud foceno <span class="state" id="st-camera"></span><button class="x" id="x-camera" aria-label="Smazat stanoviště">✕</button></span>
+    <span class="pt" id="pt-target" role="button" tabindex="0" aria-pressed="false"><i class="lg-target"></i>Co je na fotce <span class="state" id="st-target"></span><button class="x" id="x-target" aria-label="Smazat místo">✕</button></span>
+    <span class="hint" id="pl-hint"></span>
+    <span class="spacer"></span>
+    <button class="btn" id="pl-prev">← Předchozí</button>
+    <button class="btn" id="pl-save">Uložit</button>
+    <button class="btn primary" id="pl-savenext">Uložit a další →</button>
+  </div>
+</div>
+
+<div class="modal" id="unlock" hidden role="dialog" aria-modal="true" aria-labelledby="unlock-h">
+  <form class="dialog" id="unlock-form">
+    <h2 id="unlock-h">Režim úprav</h2>
+    <p class="small" style="margin:0">Polohy fotek se ukládají do souboru <code>locations.json</code> v repozitáři na GitHubu. K zápisu potřebuješ token s právem zápisu do tohoto repozitáře. Token zůstane jen v tomto prohlížeči.</p>
+    <ol class="small">
+      <li>Otevři <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">nový fine-grained token</a> (přihlášený jako Sauness).</li>
+      <li>Repository access: <b>Only select repositories</b> → <b>trello-fotodokumentace</b>.</li>
+      <li>Permissions → Repository permissions → <b>Contents: Read and write</b>.</li>
+      <li>Vygeneruj token a vlož ho sem.</li>
+    </ol>
+    <label for="token" class="small">GitHub token</label>
+    <input id="token" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…">
+    <div class="err" id="unlock-err" hidden></div>
+    <div class="row">
+      <button type="button" class="btn" id="unlock-cancel">Zrušit</button>
+      <button type="submit" class="btn primary" id="unlock-go">Odemknout</button>
+    </div>
+  </form>
+</div>
+
+<div class="toast" id="toast" hidden role="status"></div>
 
 <script>
 (() => {
@@ -245,15 +363,17 @@ function init(data) {
   const allYears = CARDS.flatMap((c) => c.years);
   const yr = allYears.length ? `${Math.min(...allYears)}–${Math.max(...allYears)}` : "";
   $("stats").innerHTML = `<span><b class="num">${nPhotos}</b> fotek</span><span><b class="num">${CARDS.length}</b> karet</span><span><b class="num">${data.lists.length}</b> kategorií</span>${yr ? `<span>roky <b class="num">${yr}</b></span>` : ""}<a href="${data.board}" target="_blank" rel="noopener">Trello board</a>`;
-  $("foot").innerHTML = `Záloha Trello boardu <a href="${data.board}" target="_blank" rel="noopener">Fotodokumentace</a>, aktualizuje se každé pondělí. Zdroj a originály fotek: <a href="${data.repo}" target="_blank" rel="noopener">GitHub</a>.`;
+  $("foot").innerHTML = `Záloha Trello boardu <a href="${data.board}" target="_blank" rel="noopener">Fotodokumentace</a>, aktualizuje se každé pondělí. Zdroj a originály fotek: <a href="${data.repo}" target="_blank" rel="noopener">GitHub</a>. · <button class="linkbtn" id="edit-open">Režim úprav</button>`;
   buildTimeline();
   buildChips();
   $("q").addEventListener("input", (e) => { state.q = fold(e.target.value.trim()); state.wallLimit = 240; render(); });
   $("v-cards").onclick = () => setView("cards");
   $("v-photos").onclick = () => setView("photos");
-  try { const v = localStorage.getItem("fd-view"); if (v === "photos") state.view = "photos"; } catch (e) {}
+  $("v-map").onclick = () => setView("map");
+  try { const v = localStorage.getItem("fd-view"); if (v === "photos" || v === "map") state.view = v; } catch (e) {}
   setView(state.view, true);
   wireLightbox();
+  wireEdit();
   window.addEventListener("hashchange", route);
   route();
 }
@@ -262,6 +382,9 @@ function setView(v, silent) {
   state.view = v;
   $("v-cards").setAttribute("aria-pressed", v === "cards");
   $("v-photos").setAttribute("aria-pressed", v === "photos");
+  $("v-map").setAttribute("aria-pressed", v === "map");
+  $("main").hidden = v === "map";
+  $("mapview").hidden = v !== "map";
   try { localStorage.setItem("fd-view", v); } catch (e) {}
   render();
 }
@@ -319,6 +442,7 @@ function render() {
   act.innerHTML = parts.length ? `<span>${parts.join(" · ")}: ${karet(cards.length)}, ${fotek(photos.length)}</span><button class="linkbtn" id="clear">Zrušit filtr</button>` : "";
   if (parts.length) $("clear").onclick = () => { state.decade = null; state.q = ""; $("q").value = ""; render(); };
 
+  if (state.view === "map") return drawMap(photos);
   if (!cards.length) { $("main").innerHTML = '<div class="empty">Nic neodpovídá filtru.</div>'; return; }
   if (state.view === "photos") return renderWall(photos);
 
@@ -336,9 +460,10 @@ function cardTile(c) {
   const ph = c.photos.slice(0, 3);
   const n = Math.min(c.photos.length, 3);
   const yr = c.years.length ? (c.years.length > 1 ? `${c.years[0]}–${c.years[c.years.length - 1]}` : c.years[0]) : "";
+  const placed = c.photos.filter((p) => p.loc).length;
   return `<button class="card" data-id="${c.id}">
     <div class="mosaic n${n}">${n ? ph.map((p) => `<img src="t/${p.id}.jpg" alt="" loading="lazy">`).join("") : "bez fotek"}</div>
-    <div class="body"><span class="t">${esc(c.name)}</span><span class="m"><span class="num">${fotek(c.photos.length)}</span>${yr ? `<span class="num">${yr}</span>` : ""}</span></div>
+    <div class="body"><span class="t">${esc(c.name)}</span><span class="m"><span class="num">${fotek(c.photos.length)}</span>${yr ? `<span class="num">${yr}</span>` : ""}${placed ? `<span class="num">${placed} na mapě</span>` : ""}</span></div>
   </button>`;
 }
 
@@ -352,7 +477,7 @@ function renderWall(photos) {
 
 function tile(p) {
   const r = p.w / p.h || 1.33;
-  return `<button data-p="${p.id}" style="flex-grow:${(r * 100).toFixed(0)};width:calc(var(--h, 180px) * ${r.toFixed(3)})" aria-label="${esc(p.caption || p.card.name)}"><img src="t/${p.id}.jpg" alt="" loading="lazy"></button>`;
+  return `<button data-p="${p.id}"${p.loc ? ' class="has-loc"' : ""} style="flex-grow:${(r * 100).toFixed(0)};width:calc(var(--h, 180px) * ${r.toFixed(3)})" aria-label="${esc(p.caption || p.card.name)}"><img src="t/${p.id}.jpg" alt="" loading="lazy"></button>`;
 }
 function wireTiles(root, seq) {
   root.querySelectorAll("[data-p]").forEach((b) => b.onclick = () => openLB(seq, seq.indexOf(BYPHOTO[b.dataset.p])));
@@ -422,6 +547,9 @@ function showLB() {
   $("lb-card").hidden = location.hash === "#c-" + p.card.id;
   $("lb-prev").disabled = lbIdx === 0;
   $("lb-next").disabled = lbIdx === lbSeq.length - 1;
+  $("lb-onmap").hidden = !p.loc;
+  $("lb-place").hidden = !TOKEN;
+  $("lb-place").textContent = p.loc ? "Upravit polohu" : "Umístit na mapu";
   [lbSeq[lbIdx + 1], lbSeq[lbIdx - 1]].forEach((q) => { if (q) new Image().src = `m/${q.id}.jpg`; });
 }
 function step(d) {
@@ -434,6 +562,8 @@ function wireLightbox() {
   $("lb-prev").onclick = () => step(-1);
   $("lb-next").onclick = () => step(1);
   $("lb-card").onclick = () => { const c = lbSeq[lbIdx].card; closeLB(); location.hash = "c-" + c.id; };
+  $("lb-onmap").onclick = () => focusOnMap(lbSeq[lbIdx]);
+  $("lb-place").onclick = () => openPlacer(lbSeq, lbIdx);
   $("lb-stage").addEventListener("click", (e) => { if (e.target === e.currentTarget) closeLB(); });
   let x0 = null;
   $("lb-stage").addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
@@ -443,12 +573,313 @@ function wireLightbox() {
     if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
   });
   document.addEventListener("keydown", (e) => {
+    if (!$("unlock").hidden) { if (e.key === "Escape") $("unlock").hidden = true; return; }
+    if (!$("placer").hidden) { if (e.key === "Escape") closePlacer(); return; }
     if (!$("lb").hidden) {
       if (e.key === "Escape") closeLB();
       else if (e.key === "ArrowRight") step(1);
       else if (e.key === "ArrowLeft") step(-1);
     } else if (!$("sheet").hidden && e.key === "Escape") location.hash = "";
   });
+}
+
+/* ---------- map ---------- */
+const BLANSKO = [49.3631, 16.6445];
+const PIN = "#c8432b", CAM = "#1a2026";
+let MAP = null, MAPLAYER = null, MARKERS = {}, lastFitKey = null, mapSeq = [];
+
+function baseLayers() {
+  const cuzk = (svc) => `https://ags.cuzk.gov.cz/arcgis1/rest/services/${svc}/MapServer/tile/{z}/{y}/{x}`;
+  return {
+    "Mapa (OpenStreetMap)": L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      { maxZoom: 19, attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>' }),
+    "Letecká (ČÚZK)": L.tileLayer(cuzk("ORTOFOTO_WM"), { maxZoom: 20, attribution: "© ČÚZK" }),
+    "Topografická (ČÚZK)": L.tileLayer(cuzk("ZTM_WM"), { maxZoom: 18, attribution: "© ČÚZK" }),
+  };
+}
+function newMap(el) {
+  const m = L.map(el, { preferCanvas: true }).setView(BLANSKO, 14);
+  const layers = baseLayers();
+  layers["Mapa (OpenStreetMap)"].addTo(m);
+  L.control.layers(layers, null, { collapsed: true }).addTo(m);
+  L.control.scale({ imperial: false }).addTo(m);
+  return m;
+}
+
+/* small arrowhead at the target, pointing away from the camera (metres, local flat approximation) */
+function arrowHead(cam, tgt) {
+  const k = Math.cos(tgt[0] * Math.PI / 180);
+  const dx = (tgt[1] - cam[1]) * 111320 * k, dy = (tgt[0] - cam[0]) * 110540;
+  const d = Math.hypot(dx, dy);
+  if (d < 5) return null;
+  const len = Math.min(40, d * 0.3), a = Math.atan2(dy, dx);
+  const wing = (s) => [tgt[0] - Math.sin(a + s) * len / 110540, tgt[1] - Math.cos(a + s) * len / (111320 * k)];
+  return [wing(0.45), tgt, wing(-0.45)];
+}
+
+function drawMap(photos) {
+  if (typeof L === "undefined") { $("map").innerHTML = '<div class="empty">Mapu se nepodařilo načíst.</div>'; return; }
+  if (!MAP) { MAP = newMap("map"); MAPLAYER = L.layerGroup().addTo(MAP); }
+  setTimeout(() => MAP.invalidateSize(), 0);
+  MAPLAYER.clearLayers(); MARKERS = {};
+  const placed = photos.filter((p) => p.loc);
+  mapSeq = placed;
+  const unplaced = photos.length - placed.length;
+  $("map-count").innerHTML = `<b class="num">${placed.length}</b> z <span class="num">${photos.length}</span> fotek má polohu` +
+    (TOKEN && unplaced ? ` · <button class="linkbtn" id="map-next">Umístit fotky bez polohy (${unplaced})</button>` : "");
+  if ($("map-next")) $("map-next").onclick = () => openPlacer(photos.filter((p) => !p.loc), 0);
+
+  const pts = [];
+  placed.forEach((p, i) => {
+    const { camera, target } = p.loc;
+    const open = () => popupFor(p, i);
+    if (camera && target) {
+      L.polyline([camera, target], { color: PIN, weight: 2, opacity: 0.85 }).on("click", open).addTo(MAPLAYER);
+      const head = arrowHead(camera, target);
+      if (head) L.polyline(head, { color: PIN, weight: 2, opacity: 0.85 }).addTo(MAPLAYER);
+    }
+    if (camera) { L.circleMarker(camera, { radius: 5, color: CAM, weight: 2, fillColor: "#fff", fillOpacity: 1 }).on("click", open).addTo(MAPLAYER); pts.push(camera); }
+    if (target) { L.circleMarker(target, { radius: 7, color: "#fff", weight: 2, fillColor: PIN, fillOpacity: 1 }).on("click", open).addTo(MAPLAYER); pts.push(target); }
+    MARKERS[p.id] = target || camera;
+  });
+  const fitKey = `${state.list}|${state.decade}|${state.q}`;
+  if (pts.length && fitKey !== lastFitKey) {
+    lastFitKey = fitKey;
+    setTimeout(() => MAP.fitBounds(L.latLngBounds(pts).pad(0.15), { maxZoom: 17 }), 0);
+  }
+}
+
+function popupFor(p, i) {
+  const el = document.createElement("div");
+  el.className = "pop";
+  el.innerHTML = `<img src="t/${p.id}.jpg" alt=""><span class="t">${esc(p.card.name)}</span><span class="s">${esc(p.card.listName)}</span>` +
+    (TOKEN ? '<button class="linkbtn" style="justify-self:start">Upravit polohu</button>' : "");
+  el.querySelector("img").onclick = () => { MAP.closePopup(); openLB(mapSeq, i); };
+  if (TOKEN) el.querySelector("button").onclick = () => { MAP.closePopup(); openPlacer(mapSeq, i); };
+  L.popup({ maxWidth: 240 }).setLatLng(MARKERS[p.id]).setContent(el).openOn(MAP);
+}
+
+function focusOnMap(p) {
+  closeLB();
+  location.hash = "";
+  state.list = null; state.decade = null; state.q = ""; $("q").value = "";
+  setView("map");
+  setTimeout(() => {
+    MAP.setView(MARKERS[p.id], 17);
+    popupFor(p, mapSeq.indexOf(p));
+  }, 50);
+}
+
+/* ---------- edit mode: GitHub token, locations.json ---------- */
+let TOKEN = null, LOCFILE = null, LOCSHA = null;
+const API = () => DATA.repo.replace("https://github.com/", "https://api.github.com/repos/");
+const gh = (path, opts = {}) => fetch(API() + path, {
+  cache: "no-store", ...opts,
+  headers: { Authorization: `Bearer ${TOKEN}`, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", ...(opts.headers || {}) },
+});
+const b64enc = (s) => { const b = new TextEncoder().encode(s); let out = ""; for (let i = 0; i < b.length; i += 0x8000) out += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(out); };
+const b64dec = (s) => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g, "")), (c) => c.charCodeAt(0)));
+
+async function enterEdit(token) {
+  TOKEN = token;
+  const r = await gh("");
+  if (!r.ok) { TOKEN = null; throw new Error(r.status === 401 ? "GitHub token odmítl (neplatný nebo vypršel)." : `GitHub odpověděl chybou ${r.status}.`); }
+  const repo = await r.json();
+  if (!repo.permissions || !repo.permissions.push) { TOKEN = null; throw new Error("Token nemá právo zápisu do tohoto repozitáře. Zkontroluj Contents: Read and write."); }
+  try { localStorage.setItem("fd-token", token); } catch (e) {}
+  document.body.classList.add("editing");
+  await loadLocations();
+  render();
+  if (!$("lb").hidden) showLB();
+}
+
+async function loadLocations() {
+  const r = await gh("/contents/locations.json?ref=main");
+  if (r.status === 404) { LOCFILE = { about: "Polohy fotek na mapě.", photos: {} }; LOCSHA = null; }
+  else if (!r.ok) throw new Error(`Nepodařilo se načíst locations.json (${r.status}).`);
+  else { const j = await r.json(); LOCSHA = j.sha; LOCFILE = JSON.parse(b64dec(j.content)); LOCFILE.photos = LOCFILE.photos || {}; }
+  for (const p of Object.values(BYPHOTO)) {
+    const l = LOCFILE.photos[p.key];
+    if (l && (l.camera || l.target)) p.loc = { camera: l.camera || null, target: l.target || null };
+    else delete p.loc;
+  }
+}
+
+function lockEdit() {
+  TOKEN = null;
+  try { localStorage.removeItem("fd-token"); } catch (e) {}
+  document.body.classList.remove("editing");
+  render();
+  if (!$("lb").hidden) showLB();
+  toast("Režim úprav je zamčený. Token byl z prohlížeče odstraněn.");
+}
+
+const round = (ll) => ll ? [Math.round(ll[0] * 1e6) / 1e6, Math.round(ll[1] * 1e6) / 1e6] : null;
+
+async function saveLocation(p, camera, target) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await loadLocations();
+    if (camera || target) {
+      LOCFILE.photos[p.key] = { card: p.card.id, file: p.file, name: p.card.name, camera: round(camera), target: round(target), updated: new Date().toISOString().slice(0, 10) };
+    } else delete LOCFILE.photos[p.key];
+    const sorted = Object.fromEntries(Object.entries(LOCFILE.photos).sort(([a], [b]) => a.localeCompare(b)));
+    const body = JSON.stringify({ ...LOCFILE, photos: sorted }, null, 1) + "\n";
+    const r = await gh("/contents/locations.json", {
+      method: "PUT",
+      body: JSON.stringify({
+        message: `Poloha fotky: ${p.card.name} (${p.file})`,
+        content: b64enc(body), branch: "main", ...(LOCSHA ? { sha: LOCSHA } : {}),
+      }),
+    });
+    if (r.ok) {
+      LOCSHA = (await r.json()).content.sha;
+      if (camera || target) p.loc = { camera: round(camera), target: round(target) }; else delete p.loc;
+      return;
+    }
+    if (r.status !== 409 && r.status !== 422) throw new Error(`Uložení selhalo (GitHub ${r.status}).`);
+  }
+  throw new Error("Uložení selhalo: soubor se mezitím změnil. Zkus to znovu.");
+}
+
+function wireEdit() {
+  $("edit-open").onclick = () => {
+    if (TOKEN) return toast("Režim úprav je zapnutý. U fotek najdeš tlačítko Umístit na mapu.");
+    $("unlock-err").hidden = true; $("token").value = ""; $("unlock").hidden = false; $("token").focus();
+  };
+  $("unlock-cancel").onclick = () => { $("unlock").hidden = true; };
+  $("unlock-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const t = $("token").value.trim();
+    if (!t) return;
+    $("unlock-go").disabled = true;
+    try { await enterEdit(t); $("unlock").hidden = true; toast("Režim úprav zapnutý. Otevři fotku a klikni na Umístit na mapu."); }
+    catch (err) { $("unlock-err").textContent = err.message; $("unlock-err").hidden = false; }
+    finally { $("unlock-go").disabled = false; }
+  });
+  $("lock").onclick = lockEdit;
+  let saved = null;
+  try { saved = localStorage.getItem("fd-token"); } catch (e) {}
+  if (saved) enterEdit(saved).catch((err) => { try { localStorage.removeItem("fd-token"); } catch (e) {} toast(err.message); });
+
+  $("pl-close").onclick = closePlacer;
+  $("pt-camera").onclick = (e) => { if (e.target.id !== "x-camera") { PL.mode = "camera"; placerUI(); } };
+  $("pt-target").onclick = (e) => { if (e.target.id !== "x-target") { PL.mode = "target"; placerUI(); } };
+  $("x-camera").onclick = () => { setPoint("camera", null); PL.mode = "camera"; placerUI(); };
+  $("x-target").onclick = () => { setPoint("target", null); PL.mode = "target"; placerUI(); };
+  $("pl-prev").onclick = () => { if (PL.idx > 0) { PL.idx--; loadPlacer(); } };
+  $("pl-save").onclick = () => savePlacer(false);
+  $("pl-savenext").onclick = () => savePlacer(true);
+}
+
+let toastTimer = null;
+function toast(msg) {
+  const t = $("toast");
+  t.textContent = msg; t.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.hidden = true; }, 5000);
+}
+
+/* ---------- placer: set camera + target for one photo ---------- */
+let PMAP = null, PL = { seq: [], idx: 0, camera: null, target: null, mode: "camera" }, PM = { camera: null, target: null }, PLINE = null;
+
+function openPlacer(seq, idx) {
+  if (!TOKEN || !seq.length) return;
+  PL.seq = seq; PL.idx = Math.max(0, idx);
+  $("placer").hidden = false;
+  document.body.style.overflow = "hidden";
+  if (!PMAP) {
+    PMAP = newMap("pmap");
+    PMAP.on("click", (e) => {
+      setPoint(PL.mode, [e.latlng.lat, e.latlng.lng]);
+      if (PL.mode === "camera" && !PL.target) PL.mode = "target";
+      placerUI();
+    });
+  }
+  setTimeout(() => { PMAP.invalidateSize(); loadPlacer(); }, 0);
+}
+
+function closePlacer() {
+  rememberView();
+  $("placer").hidden = true;
+  if ($("lb").hidden && $("sheet").hidden) document.body.style.overflow = "";
+  if (!$("lb").hidden) showLB();
+}
+
+function rememberView() {
+  if (!PMAP) return;
+  try { localStorage.setItem("fd-pl-view", JSON.stringify([PMAP.getCenter().lat, PMAP.getCenter().lng, PMAP.getZoom()])); } catch (e) {}
+}
+
+function loadPlacer() {
+  const p = PL.seq[PL.idx];
+  $("pl-img").src = `m/${p.id}.jpg`;
+  $("pl-img").alt = p.card.name;
+  $("pl-title").textContent = `${p.card.name} · ${p.card.listName}`;
+  $("pl-count").textContent = PL.seq.length > 1 ? `${PL.idx + 1} / ${PL.seq.length}` : "";
+  setPoint("camera", p.loc ? p.loc.camera : null);
+  setPoint("target", p.loc ? p.loc.target : null);
+  PL.mode = !PL.camera ? "camera" : !PL.target ? "target" : "camera";
+  const pts = [PL.camera, PL.target].filter(Boolean);
+  if (pts.length === 2) PMAP.fitBounds(L.latLngBounds(pts).pad(0.4), { maxZoom: 18 });
+  else if (pts.length === 1) PMAP.setView(pts[0], 17);
+  else {
+    let v = null;
+    try { v = JSON.parse(localStorage.getItem("fd-pl-view") || "null"); } catch (e) {}
+    if (v) PMAP.setView([v[0], v[1]], v[2]); else PMAP.setView(BLANSKO, 15);
+  }
+  placerUI();
+}
+
+function pointIcon(kind) {
+  return L.divIcon({ className: "", html: `<i class="${kind === "camera" ? "lg-camera" : "lg-target"}" style="display:block;transform:scale(1.6)"></i>`, iconSize: [14, 14], iconAnchor: [7, 7] });
+}
+
+function setPoint(kind, ll) {
+  PL[kind] = ll;
+  if (!ll) { if (PM[kind]) { PMAP.removeLayer(PM[kind]); PM[kind] = null; } }
+  else if (PM[kind]) PM[kind].setLatLng(ll);
+  else {
+    PM[kind] = L.marker(ll, { draggable: true, icon: pointIcon(kind), zIndexOffset: kind === "target" ? 1000 : 0 }).addTo(PMAP);
+    PM[kind].on("drag dragend", (e) => { const q = e.target.getLatLng(); PL[kind] = [q.lat, q.lng]; drawPlacerLine(); if (e.type === "dragend") placerUI(); });
+  }
+  drawPlacerLine();
+}
+
+function drawPlacerLine() {
+  if (PLINE) { PMAP.removeLayer(PLINE); PLINE = null; }
+  if (PL.camera && PL.target) {
+    const head = arrowHead(PL.camera, PL.target);
+    PLINE = L.polyline(head ? [[PL.camera, PL.target], head] : [PL.camera, PL.target], { color: PIN, weight: 2, dashArray: "6 5", interactive: false }).addTo(PMAP);
+  }
+}
+
+function placerUI() {
+  const fmt = (ll) => ll ? `${ll[0].toFixed(5)}, ${ll[1].toFixed(5)}` : "neurčeno";
+  $("st-camera").textContent = fmt(PL.camera);
+  $("st-target").textContent = fmt(PL.target);
+  $("x-camera").hidden = !PL.camera;
+  $("x-target").hidden = !PL.target;
+  $("pt-camera").setAttribute("aria-pressed", PL.mode === "camera");
+  $("pt-target").setAttribute("aria-pressed", PL.mode === "target");
+  $("pl-hint").textContent = PL.mode === "camera" ? "Klikni do mapy, odkud byla fotka pořízena." : "Klikni na místo, které fotka zachycuje.";
+  $("pl-prev").disabled = PL.idx === 0;
+  $("pl-prev").hidden = PL.seq.length < 2;
+  $("pl-savenext").hidden = PL.idx >= PL.seq.length - 1;
+}
+
+async function savePlacer(next) {
+  const p = PL.seq[PL.idx];
+  const btns = [$("pl-save"), $("pl-savenext")];
+  btns.forEach((b) => { b.disabled = true; });
+  try {
+    await saveLocation(p, PL.camera, PL.target);
+    rememberView();
+    toast(PL.camera || PL.target ? "Uloženo. Veřejná galerie se aktualizuje asi za minutu." : "Poloha smazána.");
+    render();
+    if (next && PL.idx < PL.seq.length - 1) { PL.idx++; loadPlacer(); }
+    else closePlacer();
+  } catch (err) { toast(err.message); }
+  finally { btns.forEach((b) => { b.disabled = false; }); }
 }
 })();
 </script>

@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "archive/**"
+      - "locations.json"
       - "scripts/**"
       - ".github/workflows/pages.yml"
   # The weekly export pushes with GITHUB_TOKEN, which does not trigger `push`

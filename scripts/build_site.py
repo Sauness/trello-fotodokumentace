@@ -9,6 +9,9 @@ Produces:
   _site/data.json         lists, cards, descriptions, comments, photo metadata
   _site/t/<id>.jpg        grid thumbnails
   _site/m/<id>.jpg        lightbox images
+Each photo carries a stable `key` (its Trello attachment id from
+archive/attachments.json) and, if set, its map positions from locations.json:
+  {"photos": {"<key>": {"camera": [lat, lng] | null, "target": [lat, lng] | null, ...}}}
 Originals are not copied; the page links to them on raw.githubusercontent.com.
 
 Reads the card README.md files written by trello_export.py, so it needs no
@@ -87,8 +90,15 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--archive", default="archive")
     ap.add_argument("--out", default="_site")
+    ap.add_argument("--locations", default="locations.json")
     args = ap.parse_args()
     archive, out = Path(args.archive), Path(args.out)
+    att_path, loc_path = archive / "attachments.json", Path(args.locations)
+    att_ids = {(sl, a["file"]): a["id"]
+               for sl, items in (json.loads(att_path.read_text(encoding="utf-8")) if att_path.exists() else {}).items()
+               for a in items}
+    locations = (json.loads(loc_path.read_text(encoding="utf-8")).get("photos", {})
+                 if loc_path.exists() else {})
 
     board = (archive / "README.md").read_text(encoding="utf-8")
     rows = re.findall(r"^\| \[(.+?)\]\((\d\d-[^/]+)/README\.md\) \| \d+ \|", board, re.M)
@@ -119,8 +129,12 @@ def main() -> None:
                            if p.is_file() and p.name != "README.md" and p.stat().st_size > 0)
             for i, f in enumerate(files):
                 pid = f"{short}-{i:03d}"
-                photo = {"id": pid, "caption": captions.get(f.name, ""),
+                key = att_ids.get((short, f.name)) or f"{short}/{re.sub(r'^[0-9]+-', '', f.name)}"
+                photo = {"id": pid, "key": key, "file": f.name, "caption": captions.get(f.name, ""),
                          "src": RAW + urllib.parse.quote(f"{ldir}/{cdir}/{f.name}")}
+                loc = locations.get(key)
+                if loc and (loc.get("camera") or loc.get("target")):
+                    photo["loc"] = {"camera": loc.get("camera"), "target": loc.get("target")}
                 photo_refs[pid] = (card, photo)
                 jobs.append((f, out, pid))
             cards.append(card)
@@ -141,6 +155,8 @@ def main() -> None:
     (out / ".nojekyll").write_text("")
 
     n = sum(len(c["photos"]) for l in lists for c in l["cards"])
+    placed = sum(1 for l in lists for c in l["cards"] for p in c["photos"] if "loc" in p)
+    print(f"{placed} photos placed on the map")
     print(f"{len(lists)} lists, {sum(len(l['cards']) for l in lists)} cards, {n} photos -> {out}")
 
 
