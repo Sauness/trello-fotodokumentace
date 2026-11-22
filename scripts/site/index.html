@@ -225,7 +225,8 @@ footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-
   /* iOS zooms into inputs under 16px */
   input, select, textarea { font-size: 16px !important; }
   .tools { flex-wrap: nowrap; gap: 8px; padding-block: 10px 8px; }
-  .search { flex: 1 1 auto; }
+  .search { flex: 1 1 0; min-width: 0; }
+  .seg { flex: none; }
   .search input { padding-block: 8px; }
   .seg button { padding: 8px 10px; }
   .chips { padding-bottom: 10px; margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; }
