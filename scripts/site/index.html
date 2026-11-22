@@ -200,7 +200,7 @@ h3 { font: 500 12px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppe
 .placer-body { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); min-height: 0; }
 .placer-photo { background: #0e1114; position: relative; min-height: 0; }
 .placer-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-#pmap { min-height: 0; height: 100%; }
+#pmap { position: absolute; inset: 0; }
 .pt { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); padding: 7px 12px; cursor: pointer; }
 .pt[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
 .pt .state { font: 12px var(--f-mono); color: var(--muted); }
@@ -212,17 +212,72 @@ h3 { font: 500 12px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppe
 
 footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-top: 1px solid var(--line); }
 
+/* zoomable lightbox photo (tap to toggle) */
+.lb-stage.zoomed { overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.lb-stage.zoomed img { position: static; width: auto; height: auto; max-width: none; max-height: none; cursor: zoom-out; }
+.lb-stage img { cursor: zoom-in; }
+.lb-hint { color: #8d98a2; font-size: 12px; }
+
 @media (max-width: 640px) {
-  header.top { padding-block: 24px 12px; }
+  header.top { padding-block: 22px 10px; }
+  h1 { margin: 8px 0 10px; }
+  .stats { gap: 4px 14px; font-size: 14px; }
+  /* iOS zooms into inputs under 16px */
+  input, select, textarea { font-size: 16px !important; }
+  .tools { flex-wrap: nowrap; gap: 8px; padding-block: 10px 8px; }
+  .search { flex: 1 1 auto; }
+  .search input { padding-block: 8px; }
+  .seg button { padding: 8px 10px; }
+  .chips { padding-bottom: 10px; margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; }
+  .chip { padding: 7px 13px; }
+  .bar-sticky { transition: transform .2s ease; }
+  .bar-sticky.away { transform: translateY(calc(-100% - env(safe-area-inset-top, 0px))); }
+  main { padding-block: 16px 48px; }
+  section.list { margin-bottom: 32px; }
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .card .body { padding: 8px 9px 10px; }
-  .wall { --h: 110px; }
-  .placer-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 2fr) minmax(0, 3fr); }
-  #map { height: 70vh; }
-  .lb-stage img { left: 4px; right: 4px; width: calc(100% - 8px); }
-  .lb-nav { display: none; }
+  .card .t { font-size: 14px; }
+  .card .m { flex-wrap: wrap; gap: 0 8px; }
+  .card .m > span { white-space: nowrap; }
+  .wall { --h: 104px; gap: 3px; }
+  .timeline .bars { height: 52px; gap: 3px; }
+  .timeline .labels { gap: 3px; font-size: 10px; }
+  .timeline .labels span { overflow: visible; }
   .timeline .labels span:nth-child(even) { visibility: hidden; }
+  .detail { gap: 22px; padding-block: 18px 48px; }
+
+  .lb { background: #0b0e11; }
+  .lb-top { gap: 8px; padding: 8px 10px 8px 14px; }
+  .lb-top .lb-act { padding: 7px 10px; }
+  .lb-stage img { left: 0; right: 0; width: 100%; }
+  .lb-nav { display: none; }
+  .lb-bottom { padding: 8px 14px 12px; }
+
+  .mapview { padding-block: 12px 24px; }
+  .map-head { font-size: 12px; margin-bottom: 8px; }
+  #map { height: var(--map-h, 62vh); min-height: 300px; margin-inline: -16px; border-radius: 0; border-inline: 0; }
+
+  .placer-head { flex-wrap: nowrap; padding: 8px 10px 8px 14px; gap: 8px; }
+  .placer-head .t { flex: 1 1 auto; font-size: 14px; }
+  .placer-head .btn { padding: 7px 12px; }
+  .placer-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: var(--ph, 26%) minmax(0, 1fr); }
+  .placer-body.photo-big { --ph: 58%; }
+  .placer-photo img { cursor: zoom-in; }
+  .placer-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 10px; }
+  .placer-foot .pt { justify-content: center; padding: 10px 8px; font-size: 14px; }
+  .placer-foot .pt .state { display: none; }
+  .placer-foot .pt[data-set="1"] .lbl::after { content: " ✓"; color: var(--accent); font-weight: 600; }
+  .placer-foot .spacer { display: none; }
+  .placer-foot .actions { grid-column: 1 / -1; display: flex; gap: 8px; }
+  .placer-foot .actions .btn { flex: 1; padding: 10px 8px; }
+  .placer-foot .actions #pl-prev { flex: 0 0 auto; }
+  .dialog { padding: 18px; }
+  .toast { bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
 }
+/* hint over the placing map, all widths */
+.pmap-wrap { position: relative; min-height: 0; }
+.pmap-wrap .hint { position: absolute; z-index: 500; top: 10px; left: 50%; transform: translateX(-50%); max-width: calc(100% - 120px); text-align: center; background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,.15); pointer-events: none; }
+.placer-foot .actions { display: flex; gap: 8px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
@@ -239,11 +294,11 @@ footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-
     <div class="tools">
       <label class="search">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" placeholder="Hledat v názvech, popisech a komentářích" aria-label="Hledat">
+        <input id="q" type="search" placeholder="Hledat v archivu" aria-label="Hledat">
       </label>
       <div class="seg" role="group" aria-label="Zobrazení">
         <button id="v-cards" aria-pressed="true">Karty</button>
-        <button id="v-photos" aria-pressed="false">Všechny fotky</button>
+        <button id="v-photos" aria-pressed="false">Fotky</button>
         <button id="v-map" aria-pressed="false">Mapa</button>
       </div>
       <span class="editbar" id="editbar">Režim úprav <button class="linkbtn" id="lock">Zamknout</button></span>
@@ -286,7 +341,7 @@ footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-
     <img id="lb-img" alt="">
     <button class="lb-nav next" id="lb-next" aria-label="Další">›</button>
   </div>
-  <div class="lb-bottom"><span class="cap" id="lb-cap"></span><span class="card-name" id="lb-cardname"></span></div>
+  <div class="lb-bottom"><span class="cap" id="lb-cap"></span><span class="card-name" id="lb-cardname"></span><span class="lb-hint" id="lb-hint"></span></div>
 </div>
 
 <div class="placer" id="placer" hidden role="dialog" aria-modal="true" aria-label="Umístění fotky na mapu">
@@ -295,18 +350,19 @@ footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-
     <span class="small num" id="pl-count"></span>
     <button class="btn" id="pl-close">Zavřít</button>
   </div>
-  <div class="placer-body">
-    <div class="placer-photo"><img id="pl-img" alt=""></div>
-    <div id="pmap"></div>
+  <div class="placer-body" id="pl-body">
+    <div class="placer-photo" id="pl-photo" title="Klepnutím zvětšíš nebo zmenšíš fotku"><img id="pl-img" alt=""></div>
+    <div class="pmap-wrap"><div id="pmap"></div><span class="hint" id="pl-hint"></span></div>
   </div>
   <div class="placer-foot">
-    <span class="pt" id="pt-camera" role="button" tabindex="0" aria-pressed="true"><i class="lg-camera"></i>Odkud foceno <span class="state" id="st-camera"></span><button class="x" id="x-camera" aria-label="Smazat stanoviště">✕</button></span>
-    <span class="pt" id="pt-target" role="button" tabindex="0" aria-pressed="false"><i class="lg-target"></i>Co je na fotce <span class="state" id="st-target"></span><button class="x" id="x-target" aria-label="Smazat místo">✕</button></span>
-    <span class="hint" id="pl-hint"></span>
+    <span class="pt" id="pt-camera" role="button" tabindex="0" aria-pressed="true"><i class="lg-camera"></i><span class="lbl">Odkud foceno</span> <span class="state" id="st-camera"></span><button class="x" id="x-camera" aria-label="Smazat stanoviště">✕</button></span>
+    <span class="pt" id="pt-target" role="button" tabindex="0" aria-pressed="false"><i class="lg-target"></i><span class="lbl">Co je na fotce</span> <span class="state" id="st-target"></span><button class="x" id="x-target" aria-label="Smazat místo">✕</button></span>
     <span class="spacer"></span>
-    <button class="btn" id="pl-prev">← Předchozí</button>
-    <button class="btn" id="pl-save">Uložit</button>
-    <button class="btn primary" id="pl-savenext">Uložit a další →</button>
+    <div class="actions">
+      <button class="btn" id="pl-prev" aria-label="Předchozí fotka">←</button>
+      <button class="btn" id="pl-save">Uložit</button>
+      <button class="btn primary" id="pl-savenext">Uložit a další →</button>
+    </div>
   </div>
 </div>
 
@@ -387,7 +443,37 @@ function setView(v, silent) {
   $("mapview").hidden = v !== "map";
   try { localStorage.setItem("fd-view", v); } catch (e) {}
   render();
+  if (v === "map" && !silent && isPhone()) {
+    document.querySelector(".bar-sticky").classList.remove("away");
+    window.scrollTo({ top: $("mapview").offsetTop - document.querySelector(".bar-sticky").offsetHeight, behavior: "smooth" });
+  }
 }
+
+const isPhone = () => window.matchMedia("(max-width: 640px)").matches;
+const isTouch = () => window.matchMedia("(pointer: coarse)").matches;
+
+/* phone: map fills the screen below the filter bar */
+function sizeMap() {
+  if (!isPhone()) { document.documentElement.style.removeProperty("--map-h"); return; }
+  const bar = document.querySelector(".bar-sticky").offsetHeight;
+  const head = document.querySelector(".map-head").offsetHeight;
+  document.documentElement.style.setProperty("--map-h", `${Math.max(300, window.innerHeight - bar - head - 24)}px`);
+  if (MAP) MAP.invalidateSize();
+}
+window.addEventListener("resize", sizeMap);
+
+/* phone: hide the filter bar while scrolling down through cards, show it on scroll up */
+(() => {
+  let lastY = window.scrollY;
+  window.addEventListener("scroll", () => {
+    const bar = document.querySelector(".bar-sticky");
+    const y = window.scrollY;
+    if (!isPhone() || state.view === "map" || y < bar.offsetTop) bar.classList.remove("away");
+    else if (y > lastY + 8) bar.classList.add("away");
+    else if (y < lastY - 8) bar.classList.remove("away");
+    if (Math.abs(y - lastY) > 8) lastY = y;
+  }, { passive: true });
+})();
 
 function buildTimeline() {
   const counts = {};
@@ -535,7 +621,9 @@ function closeLB() {
 function showLB() {
   const p = lbSeq[lbIdx];
   const img = $("lb-img");
+  $("lb-stage").classList.remove("zoomed");
   img.src = `t/${p.id}.jpg`;
+  $("lb-hint").textContent = isTouch() ? "Přejeď prstem na další fotku · klepnutím přiblížíš" : "Kliknutím přiblížíš · šipky ← → listují";
   const full = new Image();
   full.onload = () => { if (lbSeq[lbIdx] === p) img.src = full.src; };
   full.src = `m/${p.id}.jpg`;
@@ -564,11 +652,23 @@ function wireLightbox() {
   $("lb-card").onclick = () => { const c = lbSeq[lbIdx].card; closeLB(); location.hash = "c-" + c.id; };
   $("lb-onmap").onclick = () => focusOnMap(lbSeq[lbIdx]);
   $("lb-place").onclick = () => openPlacer(lbSeq, lbIdx);
-  $("lb-stage").addEventListener("click", (e) => { if (e.target === e.currentTarget) closeLB(); });
+  $("lb-stage").addEventListener("click", (e) => { if (e.target === e.currentTarget && !e.currentTarget.classList.contains("zoomed")) closeLB(); });
+  $("lb-img").addEventListener("click", (e) => {
+    const st = $("lb-stage"), img = e.currentTarget;
+    const r = img.getBoundingClientRect();
+    const fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;   // keep the tapped spot in view
+    st.classList.toggle("zoomed");
+    if (st.classList.contains("zoomed")) {
+      requestAnimationFrame(() => {
+        st.scrollLeft = Math.max(0, img.offsetWidth * fx - st.clientWidth / 2);
+        st.scrollTop = Math.max(0, img.offsetHeight * fy - st.clientHeight / 2);
+      });
+    }
+  });
   let x0 = null;
-  $("lb-stage").addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  $("lb-stage").addEventListener("touchstart", (e) => { x0 = e.touches.length === 1 ? e.touches[0].clientX : null; }, { passive: true });
   $("lb-stage").addEventListener("touchend", (e) => {
-    if (x0 === null) return;
+    if (x0 === null || $("lb-stage").classList.contains("zoomed")) { x0 = null; return; }
     const dx = e.changedTouches[0].clientX - x0; x0 = null;
     if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
   });
@@ -620,7 +720,7 @@ function arrowHead(cam, tgt) {
 function drawMap(photos) {
   if (typeof L === "undefined") { $("map").innerHTML = '<div class="empty">Mapu se nepodařilo načíst.</div>'; return; }
   if (!MAP) { MAP = newMap("map"); MAPLAYER = L.layerGroup().addTo(MAP); }
-  setTimeout(() => MAP.invalidateSize(), 0);
+  setTimeout(() => { sizeMap(); MAP.invalidateSize(); }, 0);
   MAPLAYER.clearLayers(); MARKERS = {};
   const placed = photos.filter((p) => p.loc);
   mapSeq = placed;
@@ -762,6 +862,7 @@ function wireEdit() {
   if (saved) enterEdit(saved).catch((err) => { try { localStorage.removeItem("fd-token"); } catch (e) {} toast(err.message); });
 
   $("pl-close").onclick = closePlacer;
+  $("pl-photo").onclick = () => { $("pl-body").classList.toggle("photo-big"); setTimeout(() => PMAP && PMAP.invalidateSize(), 50); };
   $("pt-camera").onclick = (e) => { if (e.target.id !== "x-camera") { PL.mode = "camera"; placerUI(); } };
   $("pt-target").onclick = (e) => { if (e.target.id !== "x-target") { PL.mode = "target"; placerUI(); } };
   $("x-camera").onclick = () => { setPoint("camera", null); PL.mode = "camera"; placerUI(); };
@@ -859,9 +960,11 @@ function placerUI() {
   $("st-target").textContent = fmt(PL.target);
   $("x-camera").hidden = !PL.camera;
   $("x-target").hidden = !PL.target;
+  $("pt-camera").dataset.set = PL.camera ? "1" : "";
+  $("pt-target").dataset.set = PL.target ? "1" : "";
   $("pt-camera").setAttribute("aria-pressed", PL.mode === "camera");
   $("pt-target").setAttribute("aria-pressed", PL.mode === "target");
-  $("pl-hint").textContent = PL.mode === "camera" ? "Klikni do mapy, odkud byla fotka pořízena." : "Klikni na místo, které fotka zachycuje.";
+  $("pl-hint").textContent = PL.mode === "camera" ? "Klepni, odkud bylo foceno" : "Klepni na místo, které je na fotce";
   $("pl-prev").disabled = PL.idx === 0;
   $("pl-prev").hidden = PL.seq.length < 2;
   $("pl-savenext").hidden = PL.idx >= PL.seq.length - 1;
