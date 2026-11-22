@@ -1,4 +1,19 @@
 {
-  "about": "Polohy fotek na mapě. Klíč = ID přílohy v Trellu. camera = odkud bylo foceno, target = co je na fotce; [lat, lng] ve WGS84 nebo null. Upravuje se z galerie (režim úprav).",
-  "photos": {}
+ "about": "Polohy fotek na mapě. Klíč = ID přílohy v Trellu. camera = odkud bylo foceno, target = co je na fotce; [lat, lng] ve WGS84 nebo null. Upravuje se z galerie (režim úprav).",
+ "photos": {
+  "6451f1b02134d604f33a2c72": {
+   "card": "ziKE2WBf",
+   "file": "10-fb-img-1683091806698.jpg",
+   "name": "Průvod Rožmitálova 1955",
+   "camera": [
+    49.361365,
+    16.642401
+   ],
+   "target": [
+    49.361547,
+    16.642345
+   ],
+   "updated": "2026-11-22"
+  }
+ }
 }
