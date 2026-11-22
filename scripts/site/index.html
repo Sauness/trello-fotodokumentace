@@ -469,7 +469,8 @@ window.addEventListener("resize", sizeMap);
   window.addEventListener("scroll", () => {
     const bar = document.querySelector(".bar-sticky");
     const y = window.scrollY;
-    if (!isPhone() || state.view === "map" || y < bar.offsetTop) bar.classList.remove("away");
+    const headerEnd = document.querySelector("header.top").offsetHeight + bar.offsetHeight;  // sticky offsetTop follows the scroll, so measure the static header
+    if (!isPhone() || state.view === "map" || y < headerEnd) bar.classList.remove("away");
     else if (y > lastY + 8) bar.classList.add("away");
     else if (y < lastY - 8) bar.classList.remove("away");
     if (Math.abs(y - lastY) > 8) lastY = y;
